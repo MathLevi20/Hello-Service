@@ -61,7 +61,7 @@ export function Log() {
     console.log(data)
     return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
         <div className={`p-7 text-2xl font-semibold flex-1 `}>
-            <h2>BlackList</h2>
+            <h2>Logs</h2>
         </div>
         <div className='  
                 py-3    grid grid-cols-7'>
