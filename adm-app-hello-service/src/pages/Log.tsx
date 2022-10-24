@@ -5,17 +5,21 @@ import useFetch from 'react-fetch-hook';
 interface User_Ban {
     id: number
     Nome: string
-    date: string
-    Status: string
+    msg: string
+    by: string
 }
-
-export function Blacklist() {
+type json_download = {
+    data: any
+    Nome: string
+    msg: string
+}
+export function Log() {
 
     const [data, setData] = useState<User_Ban[]>([])
 
     useEffect(() => {
         const getUser = async () => {
-            const URL = 'http://localhost:3000/Blacklist'
+            const URL = 'http://localhost:3000/Logs'
             const init: RequestInit = {
                 method: 'GET'
             }
@@ -30,7 +34,30 @@ export function Blacklist() {
         getUser()
 
     }, [])
-
+    const downloadFile = ({ data, fileName, fileType }: { data: any, fileName: any, fileType: any }) => {
+        // Create a blob with the data we want to download as a file
+        const blob = new Blob([data], { type: fileType })
+        // Create an anchor element and dispatch a click event on it
+        // to trigger a download
+        const a = document.createElement('a')
+        a.download = fileName
+        a.href = window.URL.createObjectURL(blob)
+        const clickEvt = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        })
+        a.dispatchEvent(clickEvt)
+        a.remove()
+    }
+    const exportToJson = (e: { preventDefault: () => void; }) => {
+        e.preventDefault()
+        downloadFile({
+            data: JSON.stringify(data),
+            fileName: 'users.json',
+            fileType: 'text/json',
+        })
+    }
     console.log(data)
     return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
         <div className={`p-7 text-2xl font-semibold flex-1 `}>
@@ -45,11 +72,14 @@ export function Blacklist() {
                 Nome
             </div >
             <div className='border-x px-2 py-2 '>
-                Tipo do ban
+                Descrição
             </div>
             <div className='border-x-l px-2 py-2 '>
-                Data
+                Admin
             </div>
+            <button type='button' className='flex w-max rounded bg-lime-600 p-2 text-white' onClick={exportToJson}>
+                Export to JSON
+            </button>
         </div>
         <div>
             {
@@ -69,13 +99,13 @@ export function Blacklist() {
                             {data.id}
                         </div>
                         <div>{data.Nome}</div>
-                        <div>{data.Status}</div>
-                        <div>{data.date}</div>
+                        <div>{data.msg}</div>
+                        <div>{data.by}</div>
                         <button className="bg-slate-800 text-[12px] hover:bg-slate-900 text-white font-bold py-2 px-2 rounded">
                             Ver Perfil
                         </button>
                         <button className="bg-red-500 hover:bg-red-700 text-[12px] text-white font-bold py-2 px-2 rounded">
-                            Excluir 
+                            Excluir
                         </button>
                         <button className="bg-yellow-400 text-[12px] hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded">
                             Desbanir
@@ -89,4 +119,4 @@ export function Blacklist() {
     </div >
 }
 
-export default Blacklist
+export default Log

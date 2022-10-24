@@ -5,9 +5,10 @@ export function Nav() {
   const [open, setOpen] = useState(true)
   const Menus = [
     { title: "Dashboard", src: "Chart_fill", path: "/" },
-    { title: "Inbox", src: "Chat", path: "/Inbox" },
+    { title: "Services", src: "Chat", path: "/Services" },
     { title: "Accounts", src: "User", gap: true, path: "/Accounts" },
     { title: "BlackList ", src: "Calendar", path: "/BlackList" },
+    { title: "Log ", src: "Chart", path: "/Log" },
     { title: "Search", src: "Search", path: "/Search" },
     { title: "Analytics", src: "Chart", path: "/Chart" },
     { title: "Files ", src: "Folder", gap: true, path: "/Folder" },
