@@ -1,7 +1,8 @@
 ﻿
 
 import { useEffect, useState } from 'react'
-
+import ModalService from '../components/ModalService'
+import ModalServicePost from '../components/ModalServiceAdd'
 interface Services {
     id: number
     Nome: string
@@ -62,15 +63,17 @@ export function Services() {
                         <div>Ativos:{data.User_ative}</div>
 
                     </div>
-                    <button onClick={togglePopup} className="bg-slate-800 text-[12px]  hover:bg-slate-900 text-white font-bold py-2 px-5 rounded">
-                        Ver Mais
+                    <button onClick={togglePopup} >
+                        <ModalService descricao={data.Descrição}
+                            title={data.Nome}
+                            id={data.id} />
                     </button>
                 </div>))
+
             }
-            <button className="bg-slate-800 text-[15px] hover:bg-slate-900   
-                      mb-2 text-white font-bold  rounded">
-                Adicionar
-            </button>
+
+            <ModalServicePost descricao={''} title={''} id={(Object.keys(data).length) + 2} />
+
 
 
         </div>

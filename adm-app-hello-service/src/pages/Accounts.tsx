@@ -12,6 +12,7 @@ interface User {
 export function Accounts() {
 
     const [data, setData] = useState<User[]>([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getUser = async () => {
@@ -24,7 +25,10 @@ export function Accounts() {
             const data = await response.json()
 
             setData(data)
-
+            setTimeout(function () {
+                console.log("Delayed for 5 second.");
+                setIsLoading(false);
+            }, 1500);
         }
 
         getUser()
@@ -51,7 +55,13 @@ export function Accounts() {
 
             </div>
             {
-                data.map(data => (<div className='
+                isLoading ? (<div className="flex items-center justify-center py-24 ">
+                    <div className="spinner-border items-center  animate-spin                     transition duration-1000
+                                block w-8 h-8 rounded-full m-12" role="status">
+                        <img src='./src/assets/loading.png'
+                            width="40" />
+                    </div>
+                </div>) : data.map(data => (<div className='
                 block
                 px-6
                 py-3
