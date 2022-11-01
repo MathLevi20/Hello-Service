@@ -30,7 +30,7 @@ export function Blacklist() {
             setTimeout(function () {
                 console.log("Delayed for 5 second.");
                 setIsLoading(false);
-            }, 1500);
+            }, 600);
         }
 
         getUser()

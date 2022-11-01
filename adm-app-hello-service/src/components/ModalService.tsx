@@ -9,7 +9,6 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
     const [Desc, setDesc] = useState("");
     const [Title, setTitle] = useState("");
 
-
     async function Post(title: string, descricao: string, id: number) {
         const addRecordEndpoint = "http://localhost:3000/Services/" + id;
         const options = {
@@ -28,7 +27,7 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
         const response = await fetch(addRecordEndpoint, options);
         const jsonResponse = await response.json().then(() => {
             window.location.reload();
-            setShowModal(false)
+            setShowModal(false);
         });
         console.log(jsonResponse);
 

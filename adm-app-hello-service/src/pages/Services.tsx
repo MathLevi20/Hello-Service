@@ -1,6 +1,7 @@
 ﻿
 
 import { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
 import ModalService from '../components/ModalService'
 import ModalServicePost from '../components/ModalServiceAdd'
 interface Services {
@@ -14,6 +15,7 @@ export function Services() {
 
     const [data, setData] = useState<Services[]>([])
     const [popupVisible, setPopupVisible] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState(true);
 
     console.log(typeof (data))
     console.log((data))
@@ -28,7 +30,10 @@ export function Services() {
             const data = await response.json()
 
             setData(data)
-
+            setTimeout(function () {
+                console.log("Delayed for 5 second.");
+                setIsLoading(false);
+            }, 400);
         }
 
         getUser()
@@ -43,9 +48,15 @@ export function Services() {
             <h2>Serviços</h2>
         </div>
 
-        <div className=' grid grid-cols-4  gap-4'>
-            {
-                data.map(data => (<div className='
+
+        {isLoading ? (<div className="flex items-center justify-center py-24 ">
+            <div className="spinner-border items-center  animate-spin                     transition duration-1000
+                      block w-8 h-8 rounded-full m-12" role="status">
+                <img src='./src/assets/loading.png'
+                    width="40" />
+            </div>
+        </div>) : <div className=' grid grid-cols-4  gap-4'>
+            {data.map(data => (<div className='
                       block
                       px-6
                       py-3
@@ -57,28 +68,29 @@ export function Services() {
                       hover:bg-gray-100
                      
                     ' key={data.id}>
-                    <div className='p-1'>
+                <div className='p-1'>
 
-                        <div>{data.Nome}</div>
-                        <div>Ativos:{data.User_ative}</div>
+                    <div>{data.Nome}</div>
+                    <div>Ativos:{data.User_ative}</div>
 
-                    </div>
-                    <button onClick={togglePopup} >
-                        <ModalService
-                            descricao={data.Descrição}
-                            title={data.Nome}
-                            id={data.id} />
-                    </button>
-                </div>))
-
-            }
-
+                </div>
+                <button onClick={togglePopup} >
+                    <ModalService
+                        descricao={data.Descrição}
+                        title={data.Nome}
+                        id={data.id} />
+                </button>
+            </div>))}
             <ModalServicePost descricao={''} title={''} id={(Object.keys(data).length) + 2} />
-
-
-
         </div>
+        }
 
-    </div >
+
+
+
+
+    </div>
+
+
 }
 export default Services

@@ -16,6 +16,7 @@ type json_download = {
 export function Log() {
 
     const [data, setData] = useState<User_Ban[]>([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getUser = async () => {
@@ -27,7 +28,11 @@ export function Log() {
             const response = await fetch(URL, init)
             const data = await response.json()
 
-            setData(data)
+            setData(data)           
+            setTimeout(function () {
+                console.log("Delayed for 5 second.");
+                setIsLoading(false);
+            }, 400);
 
         }
 
@@ -82,7 +87,13 @@ export function Log() {
             </button>
         </div>
         <div>
-            {
+            {isLoading ? (<div className="flex items-center justify-center py-24 ">
+            <div className="spinner-border items-center  animate-spin                     transition duration-1000
+                      block w-8 h-8 rounded-full m-12" role="status">
+                <img src='./src/assets/loading.png'
+                    width="40" />
+            </div>
+        </div>) :
                 data.map(data => (<div className='
                       block
                       px-6

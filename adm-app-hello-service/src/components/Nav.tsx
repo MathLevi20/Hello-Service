@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 export function Nav() {
   const [open, setOpen] = useState(true)
   const Menus = [
-    { title: "Dashboard", src: "Chart_fill", path: "/" },
-    { title: "Services", src: "Chat", path: "/Services" },
-    { title: "Accounts", src: "User", gap: true, path: "/Accounts" },
-    { title: "BlackList ", src: "Calendar", path: "/BlackList" },
-    { title: "Log ", src: "Chart", path: "/Log" },
-    { title: "Search", src: "Search", path: "/Search" },
-    { title: "Analytics", src: "Chart", path: "/Chart" },
-    { title: "Files ", src: "Folder", gap: true, path: "/Folder" },
-    { title: "Setting", src: "Setting", path: "/Settings" },
+    { title: "Dashboard", src: "Share", path: "/" },
+    { title: "Services", src: "Tool", path: "/Services" },
+    { title: "Contract", src: "Contract", path: "/Contract" },
+    { title: "Accounts", src: "Contact", gap: true, path: "/Accounts" },
+    { title: "BlackList ", src: "Lock", path: "/BlackList" },
+    { title: "Log ", src: "file", path: "/Log" },
+    { title: "Search", src: "Seach", path: "/Search" },
+    { title: "Setting", src: "Setting", gap: true, path: "/Settings" },
   ];
   return (
     <div className="relative  ">
