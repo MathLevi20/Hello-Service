@@ -30,7 +30,10 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
         }
 
         const response = await fetch(addRecordEndpoint, options);
-        const jsonResponse = await response.json();
+        const jsonResponse = await response.json().then(() => {
+            window.location.reload();
+            setShowModal(false)
+        });;
         console.log(jsonResponse);
         console.log(id);
     }
@@ -41,7 +44,7 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
         <>
 
             <button className="bg-slate-800 text-[15px] hover:bg-slate-900   
-                      mb-2 text-white font-bold  rounded"  onClick={() => setShowModal(true)}>
+                      mb-2 text-white font-bold p-10 rounded"  onClick={() => setShowModal(true)}>
                 Adicionar
             </button>
             {showModal ? (

@@ -26,11 +26,12 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
         }
 
         const response = await fetch(addRecordEndpoint, options);
-        const jsonResponse = await response.json();
-        console.log(jsonResponse);
-        if (jsonResponse == true) {
+        const jsonResponse = await response.json().then(() => {
+            window.location.reload();
             setShowModal(false)
-        }
+        });
+        console.log(jsonResponse);
+
     }
     async function Delete(id: number) {
         const addRecordEndpoint = "http://localhost:3000/Services/" + id;
@@ -43,7 +44,9 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
         }
 
         const response = await fetch(addRecordEndpoint, options);
-        const jsonResponse = await response.json();
+        const jsonResponse = await response.json().then(() => {
+            window.location.reload();
+        });
         if (Boolean(jsonResponse)) {
             setShowModal(false)
         }

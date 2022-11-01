@@ -64,7 +64,8 @@ export function Services() {
 
                     </div>
                     <button onClick={togglePopup} >
-                        <ModalService descricao={data.Descrição}
+                        <ModalService
+                            descricao={data.Descrição}
                             title={data.Nome}
                             id={data.id} />
                     </button>

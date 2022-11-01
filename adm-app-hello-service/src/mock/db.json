@@ -1,4 +1,4 @@
-﻿{
+{
   "Usuarios": [
     {
       "id": 0,
@@ -66,6 +66,24 @@
       "Nome": "Garçom",
       "User_ative": 1000,
       "Descrição": "Serve alimentos e bebidas aos clientes, anota pedidos e organiza e limpa mesas e cadeiras em restaurantes, bares, hotéis e eventos."
+    },
+    {
+      "id": 4,
+      "User_ative": 0,
+      "Nome": "teste",
+      "Descrição": "asdasd"
+    },
+    {
+      "id": 5,
+      "User_ative": 0,
+      "Nome": "ola mundo",
+      "Descrição": "asodasdasd"
+    },
+    {
+      "id": 6,
+      "User_ative": 0,
+      "Nome": "Teste 02",
+      "Descrição": "wawd\n"
     }
   ]
 }
