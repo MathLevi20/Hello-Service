@@ -17,7 +17,7 @@ export function Set({ descricao, title, id }: { descricao: string, title: string
             body: JSON.stringify(
                 {
 
-                    'name': title,
+                    'Name': title,
                     'Text': descricao
                 }
             )
@@ -32,14 +32,21 @@ export function Set({ descricao, title, id }: { descricao: string, title: string
 
     }
     console.log(Desc)
-    useEffect(() => {
+    async function Pot (){
+    if (Desc == "" && Title == ""){
+        Put(title, descricao, Number(id) )
+    }
+    else if (Desc == ""){
+        Put(Title, descricao, Number(id) )
+    }
+    else if (Title == ""){
+        Put(title, Desc, Number(id) )
+    }
+    else{
+        Put(Title, Desc, Number(id) )
+    }
 
-        setTitle(title)
-        setDesc(descricao)
-
-
-    }, [])
-
+    }
     return (
         <>
             <>
@@ -50,7 +57,7 @@ export function Set({ descricao, title, id }: { descricao: string, title: string
                     {/*body*/}
                     <div className="relative  flex-auto">
                         <div className="mb-3 pt-0">
-                            <input type="text" defaultValue={title} placeholder="Titulo" onChange={(e) => setTitle(e.target.value)} className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full" />
+                            <input type="text" defaultValue={title} placeholder="Titulo" onChange={(e) => {setTitle(e.target.value),console.log(Title)}} className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full" />
                         </div>
                         <div className="py-2 px-4 border-2  bg-white rounded-b-lg  dark:bg-gray-800">
 
@@ -67,7 +74,7 @@ export function Set({ descricao, title, id }: { descricao: string, title: string
                             className="bg-green-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="button"
 
-                            onClick={() => Put(Title, Desc, Number(id))}
+                            onClick={() => {Pot()}}
                         >
                             Save
                         </button>

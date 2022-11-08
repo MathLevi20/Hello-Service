@@ -50,10 +50,11 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
                       border border-gray-400 mb-2
                       w-full
                       rounded-md
-                 
+                    
                       cursor-pointer
-                      hover:bg-gray-100"  onClick={() => setShowModal(true)}>
-                Adicionar
+                      hover:bg-yellow-300 hover:text-black"  onClick={() => setShowModal(true)}>
+               <div className='py-5'> Adicionar</div> 
+                
             </button>
             {showModal ? (
                 <>

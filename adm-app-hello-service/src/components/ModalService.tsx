@@ -51,7 +51,21 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
         }
         console.log(Boolean(jsonResponse))
     }
-
+    async function Pot (){
+        if (Desc == "" && Title == ""){
+            PUT(title, descricao, Number(id) )
+        }
+        else if (Desc == ""){
+            PUT(Title, descricao, Number(id) )
+        }
+        else if (Title == ""){
+            PUT(title, Desc, Number(id) )
+        }
+        else{
+            PUT(Title, Desc, Number(id) )
+        }
+    
+        }
 
     console.log(Desc)
     console.log(Title)
@@ -108,7 +122,7 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
                                     <button
                                         className="bg-green-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => PUT(Title, Desc, id)}
+                                        onClick={() => Pot()}
                                     >
                                         Save
                                     </button>
