@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { flushSync } from 'react-dom'
 import ModalService from '../components/ModalService'
-import ModalServicePost from '../components/ModalServiceAdd'
+import ModalServicePost from '../components/ModalServicePost'
 interface Services {
     id: number
     Nome: string

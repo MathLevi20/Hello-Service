@@ -1,25 +1,30 @@
 ﻿
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
 import React from "react";
 
 
-export function ModalService({ descricao, title, id }: { descricao: string, title: string, id: number }) {
+export function ContractPost({ descricao, title, id }: { descricao: string, title: string, id: number }) {
     const [showModal, setShowModal] = useState(false);
     const [Desc, setDesc] = useState("");
     const [Title, setTitle] = useState("");
+    const id_ = useId();
 
-    async function PUT(title: string, descricao: string, id: number) {
-        const addRecordEndpoint = "http://localhost:3000/Services/" + id;
+    const handleClick = Math.floor(Math.random() * 100);
+    async function Post(title: string, descricao: string, id: number) {
+        const addRecordEndpoint = "http://localhost:3000/Contract";
         const options = {
-            method: 'PUT',
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+
             },
             body: JSON.stringify(
                 {
-                    'Nome': title,
-                    'Descrição': descricao
+                    'id': handleClick,
+                    'Name': title,
+                    'Text': descricao
+
                 }
             )
         }
@@ -27,42 +32,27 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
         const response = await fetch(addRecordEndpoint, options);
         const jsonResponse = await response.json().then(() => {
             window.location.reload();
-            setShowModal(false);
-        });
-        console.log(jsonResponse);
-
-    }
-    async function Delete(id: number) {
-        const addRecordEndpoint = "http://localhost:3000/Services/" + id;
-        const options = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-        }
-
-        const response = await fetch(addRecordEndpoint, options);
-        const jsonResponse = await response.json().then(() => {
-            window.location.reload();
-        });
-        if (Boolean(jsonResponse)) {
             setShowModal(false)
-        }
-        console.log(Boolean(jsonResponse))
+        });;
+        console.log(jsonResponse);
+        console.log(id);
     }
-
 
     console.log(Desc)
-    console.log(Title)
     return (
         <>
-            <button
-                className="bg-slate-800 text-[12px]  hover:bg-slate-900 text-white font-bold py-2 px-5 rounded ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(true)}
-            >
-                Ver mais
+
+            <button className="bg-slate-800 text-[15px] hover:bg-slate-900   
+                      text-white font-bold rounded                       block
+                      px-6
+                      py-5
+                      border border-gray-400 mb-2
+                      w-full
+                      rounded-md
+                 
+                      cursor-pointer
+                      hover:bg-yellow-300 hover:text-black"  onClick={() => setShowModal(true)}>
+                Adicionar
             </button>
             {showModal ? (
                 <>
@@ -79,13 +69,13 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
                                     <div className="mb-3 pt-0">
-                                        <input type="text" defaultValue={title} onChange={(e) => setTitle(e.target.value)} className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full" />
+                                        <input type="text" placeholder={"Titulo "} onChange={(e) => setTitle(e.target.value)} className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full" />
                                     </div>
                                     <div className="py-2 px-4 border-2  bg-white rounded-b-lg  dark:bg-gray-800">
-                                        <p className="mb-4 text-slate-900 text-lg text-left w-full leading-relaxed">Descrição</p>
+
                                         <textarea style={{ minHeight: "14vh", minWidth: "90vh", height: "unset" }} id="editor" className="block px-0 w-full text-sm outline-none
                                          text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0
-                                          dark:text-white dark:placeholder-gray-400" defaultValue={descricao} onChange={(e) => setDesc(e.target.value)} />
+                                          dark:text-white dark:placeholder-gray-400" placeholder={"Descrição "} onChange={(e) => setDesc(e.target.value)} />
                                     </div>
 
                                 </div>
@@ -98,17 +88,12 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
                                     >
                                         Close
                                     </button>
+
                                     <button
                                         className="bg-green-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => { Delete(id) }}
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        className="bg-green-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        type="button"
-                                        onClick={() => PUT(Title, Desc, id)}
+
+                                        onClick={() => Post(Title, Desc, Number(id_))}
                                     >
                                         Save
                                     </button>
@@ -124,4 +109,4 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
 }
 
 
-export default ModalService
+export default ContractPost

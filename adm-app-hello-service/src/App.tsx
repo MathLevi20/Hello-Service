@@ -8,6 +8,7 @@ import Schedule from "./pages/Schedule";
 import Search from "./pages/Search";
 import Settings from "./pages/Settings";
 import Log from "./pages/Log";
+import Contract from "./pages/Contract";
 
 export function App() {
 
@@ -19,6 +20,7 @@ export function App() {
           <Route path="/Accounts" element={<Accounts />} />
           <Route path="/Blacklist" element={<Blacklist />} />
           <Route path="/Log" element={<Log />} />
+          <Route path="/Contract" element={<Contract />} />
           <Route path="/Folder" element={<Folder />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/Schedule" element={<Schedule />} />

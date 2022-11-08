@@ -1,5 +1,5 @@
 ﻿
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
 import React from "react";
 
@@ -8,8 +8,9 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
     const [showModal, setShowModal] = useState(false);
     const [Desc, setDesc] = useState("");
     const [Title, setTitle] = useState("");
+    const id_ = useId();
 
-
+    const handleClick = Math.floor(Math.random() * 1000);
     async function Post(title: string, descricao: string, id: number) {
         const addRecordEndpoint = "http://localhost:3000/Services";
         const options = {
@@ -20,9 +21,9 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
             },
             body: JSON.stringify(
                 {
-                    'id': id,
-                    "User_ative": 0,
+                    'id': handleClick,
                     'Nome': title,
+                    'User_ative': handleClick,
                     'Descrição': descricao
 
                 }
@@ -38,13 +39,20 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
         console.log(id);
     }
 
-
     console.log(Desc)
     return (
         <>
 
             <button className="bg-slate-800 text-[15px] hover:bg-slate-900   
-                      mb-2 text-white font-bold p-10 rounded"  onClick={() => setShowModal(true)}>
+                      text-white font-bold rounded                       block
+                      px-6
+                      py-5
+                      border border-gray-400 mb-2
+                      w-full
+                      rounded-md
+                 
+                      cursor-pointer
+                      hover:bg-gray-100"  onClick={() => setShowModal(true)}>
                 Adicionar
             </button>
             {showModal ? (
@@ -86,7 +94,7 @@ export function ModalServicePost({ descricao, title, id }: { descricao: string, 
                                         className="bg-green-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
 
-                                        onClick={() => Post(Title, Desc, Number(id))}
+                                        onClick={() => Post(Title, Desc, Number(id_))}
                                     >
                                         Save
                                     </button>
