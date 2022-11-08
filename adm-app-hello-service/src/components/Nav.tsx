@@ -16,7 +16,7 @@ export function Nav() {
   return (
     <div className="relative  ">
       <div className={`${open ? "w-72" : "w-20"} p-5 pt-5 duration-300 h-screen bg-yellow-300 relative `}>
-        <img src='./src/assets/control.png'
+        <img src='./src/assets/NavBar/control.png'
           className={`absolute cursor-pointer  rounded-full 
        -right-3 top-9 w-7 border-2 border-yellow-300 ${!open && "rotate-180"} `}
           onClick={() => setOpen(!open)} />
@@ -33,7 +33,7 @@ export function Nav() {
               <Link to={menu.path}>
                 <li key={index} className={`text-gray-800 text-sm cursor-pointer flex items-center gap-x-4 p-2
                hover:bg-slate-200 rounded-md ${menu.gap ? "mt-8" : "mt-2"}`}>
-                  <img src={`./src/assets/${menu.src}.png`} />
+                  <img src={`./src/assets/NavBar/${menu.src}.png`} />
                   <span className={`${!open && 'hidden'} origin-left duration-200`}>{menu.title}</span>
                 </li>
               </Link>))}
