@@ -89,7 +89,7 @@ export function Contract_list() {
                       text-black
                       cursor-pointer
                       hover:bg-gray-100
-                     
+                        text-[20px]
                     ' key={data.id}>
                             <div className='flex justify-between'>
                                 <button onClick={() => { setid(data.id), setname(data.Name), settext(data.Text) }} >

@@ -9,6 +9,7 @@ import Search from "./pages/Search";
 import Settings from "./pages/Settings";
 import Log from "./pages/Log";
 import Contract from "./pages/Contract";
+import User1 from "./pages/User";
 
 export function App() {
 
@@ -26,6 +27,7 @@ export function App() {
           <Route path="/Schedule" element={<Schedule />} />
           <Route path="/Search" element={<Search />} />
           <Route path="/Settings" element={<Settings />} />
+          <Route path="/User/:userId" element={<User1 />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import useFetch from 'react-fetch-hook';
 
 interface User_Ban {
+    is_banided_perm: boolean;
+    is_banided_temp: boolean;
     id: number
     Nome: string
     date: string
@@ -17,7 +19,7 @@ export function Blacklist() {
     console.log(isLoading)
     useEffect(() => {
         const getUser = async () => {
-            const URL = 'http://localhost:3000/Blacklist'
+            const URL = 'http://localhost:3000/Usuarios'
             const init: RequestInit = {
                 method: 'GET'
             }
@@ -36,8 +38,18 @@ export function Blacklist() {
         getUser()
 
     }, [])
+    let updateNote = async (id: any, data: any, is_banided_perm: any, is_banided_temp: any) => {
 
 
+        await fetch(`http://localhost:3000/Usuarios/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...data, is_banided_perm, is_banided_temp }),
+        });
+    };
+    console.log(typeof (data))
     return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
         <div className={`p-7 text-2xl font-semibold flex-1 `}>
             <h2>BlackList</h2>
@@ -65,7 +77,7 @@ export function Blacklist() {
                         <img src='./src/assets/loading.png'
                             width="40" />
                     </div>
-                </div>) : data.map(data => (<div className='
+                </div>) : data.filter(data => data.is_banided_perm === true || data.is_banided_temp === true).map(data => (<div className='
                  
                       block
                       px-6
@@ -90,7 +102,7 @@ export function Blacklist() {
                         <button className="bg-red-500 hover:bg-red-700 text-[12px] text-white font-bold py-2 px-2 rounded">
                             Excluir
                         </button>
-                        <button className="bg-yellow-400 text-[12px] hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded">
+                        <button className="bg-yellow-400 text-[12px] hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded" onClick={() => updateNote(data.id, data, false, false)}>
                             Desbanir
                         </button>
 

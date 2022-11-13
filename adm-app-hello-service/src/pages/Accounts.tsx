@@ -6,7 +6,8 @@ interface User {
     id: number
     Nome: string
     cpf: string
-
+    is_banided_perm: boolean
+    is_banided_temp: boolean
 }
 
 export function Accounts() {
@@ -34,7 +35,17 @@ export function Accounts() {
         getUser()
 
     }, [])
+    let updateNote = async (id: any, data: any, a: any, value: any) => {
 
+
+        await fetch(`http://localhost:3000/Usuarios/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...data, [a]: value }),
+        });
+    };
     console.log(data)
     return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
         <div className={`p-7 text-2xl font-semibold flex-1 `}>
@@ -61,7 +72,7 @@ export function Accounts() {
                         <img src='./src/assets/loading.png'
                             width="40" />
                     </div>
-                </div>) : data.map(data => (<div className='
+                </div>) : data.filter(data => data.is_banided_perm == false && data.is_banided_temp == false).map(data => (<div className='
                 block
                 px-6
                 py-3
@@ -80,13 +91,13 @@ export function Accounts() {
                         </div>
                         <div>{data.cpf}</div>
 
-                        <button className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded">
+                        <button className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded " onClick={event => window.location.href = '/User/' + data.id}>
                             Ver Perfil
                         </button>
-                        <button className="bg-red-500 hover:bg-red-700 text-sm text-white font-bold py-2  px-2 rounded">
+                        <button className="bg-red-500 hover:bg-red-700 text-sm text-white font-bold py-2  px-2 rounded" onClick={() => updateNote(data.id, data, ("is_banided_temp"), true)}>
                             Banir Temporariamente
                         </button>
-                        <button className="bg-slate-800 text-sm hover:bg-slate-900 text-white font-bold py-2 px-2 rounded">
+                        <button className="bg-slate-800 text-sm hover:bg-slate-900 text-white font-bold py-2 px-2 rounded" onClick={() => updateNote(data.id, data, ("is_banided_perm"), true)}>
                             Banir Permanentemente
                         </button>
                     </div>

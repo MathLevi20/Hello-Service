@@ -1,9 +1,54 @@
-{
+﻿{
   "Usuarios": [
     {
-      "id": 0,
+      "id": "asdasd",
       "Nome": "Bruno",
       "cpf": "08229970025"
+    },
+    {
+      "id": "de81d998-aea0-4090-b11d-0f46943bedc8",
+      "username": "Narutooo",
+      "first_name": "Naruto",
+      "last_name": "Uzumaki",
+      "password": "$2a$10$363XaoG.aqMIGfucYMX74.51TuYrnVhfU3LdhLhY7FXAgNrIPUnIK",
+      "phone_number": "8697899898",
+      "email": "naruto@gmail.com",
+      "avatar": "/src/assets/Mock/naruto.jpeg",
+      "avegarge_rating": null,
+      "description": "tenho boas habilidades manuais e agilidade",
+      "zip_code": "64049-049",
+      "state": "Konoha",
+      "cyte": "Vila da Folha",
+      "is_banided_perm": false,
+      "is_banided_temp": false,
+      "created_at": "2022-11-09T03:38:54.262Z",
+      "updated_at": "2022-11-09T03:38:54.262Z",
+      "is_activate": true,
+      "is_appointed": false,
+      "cpf": "0123456789"
+    },
+    {
+      "id": "71ee2ce6-5e67-4b58-9277-a27861bfea19",
+      "username": "Sasukeee",
+      "first_name": "Sasuke",
+      "last_name": "Uchiha",
+      "password": "$2a$10$/hMTJtmJTCrg9Fk8tcewNOlbcGy23cMfgH/HtzxVyTgDulnzC8kXC",
+      "phone_number": "8697899898",
+      "email": "sasuke@gmail.com",
+      "avatar": "linkaqui",
+      "avegarge_rating": null,
+      "description": "tenho boas visão,força e agilidade",
+      "zip_code": "64049-049",
+      "state": "Konoha",
+      "cyte": "Vila da Folha",
+      "is_banided_perm": false,
+      "is_banided_temp": false,
+      "created_at": "2022-11-09T03:39:12.542Z",
+      "updated_at": "2022-11-09T03:39:12.542Z",
+      "is_activate": true,
+      "is_appointed": false,
+      "cpf": "1123456789",
+      "value": false
     },
     {
       "id": 1,
@@ -101,11 +146,6 @@
       "id": 97,
       "Name": "Ola mundo",
       "Text": "teste 01\n"
-    },
-    {
-      "Name": "mundo aaaa",
-      "Text": "ola aa",
-      "id": 35
     }
   ]
 }
