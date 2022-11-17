@@ -10,12 +10,16 @@ import Settings from "./pages/Settings";
 import Log from "./pages/Log";
 import Contract from "./pages/Contract";
 import User1 from "./pages/User";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 export function App() {
 
   return (
     <BrowserRouter>
       <div className="flex row-auto ">
+
+
         <Nav />
         <Routes>
           <Route path="/Accounts" element={<Accounts />} />
@@ -25,7 +29,9 @@ export function App() {
           <Route path="/Folder" element={<Folder />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/Schedule" element={<Schedule />} />
-          <Route path="/Search" element={<Search />} />
+            <Route path="/Search" element={<Search />} />
+            <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/User/:userId" element={<User1 />} />
         </Routes>

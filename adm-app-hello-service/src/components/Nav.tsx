@@ -10,7 +10,6 @@ export function Nav() {
     { title: "Accounts", src: "Contact", gap: true, path: "/Accounts" },
     { title: "BlackList ", src: "Lock", path: "/BlackList" },
     { title: "Log ", src: "file", path: "/Log" },
-    { title: "Search", src: "Seach", path: "/Search" },
     { title: "Setting", src: "Setting", gap: true, path: "/Settings" },
 
   ];

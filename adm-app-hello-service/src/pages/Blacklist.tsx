@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import useFetch from 'react-fetch-hook';
 
 interface User_Ban {
+    username: any;
     is_banided_perm: boolean;
     is_banided_temp: boolean;
     id: number
@@ -15,6 +16,7 @@ export function Blacklist() {
 
     const [data, setData] = useState<User_Ban[]>([])
     const [isLoading, setIsLoading] = useState(true);
+    const [se, setSe] = useState(" ");
     console.log(data)
     console.log(isLoading)
     useEffect(() => {
@@ -51,8 +53,11 @@ export function Blacklist() {
     };
     console.log(typeof (data))
     return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
-        <div className={`p-7 text-2xl font-semibold flex-1 `}>
+        <div className={`py-7 text-2xl font-semibold flex-1 `}>
             <h2>BlackList</h2>
+        </div>
+        <div className="mb-3  pt-0">
+            <input type="text" placeholder={"Procurar"} onChange={(e) => setSe(e.target.value)} className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full" />
         </div>
         <div className='  
                 py-3    grid grid-cols-7'>
@@ -77,7 +82,14 @@ export function Blacklist() {
                         <img src='./src/assets/loading.png'
                             width="40" />
                     </div>
-                </div>) : data.filter(data => data.is_banided_perm === true || data.is_banided_temp === true).map(data => (<div className='
+                </div>) : data.filter(data => {
+                    console.log(data.username)
+                    if (se == " " && (data.is_banided_perm == true || data.is_banided_temp == true)) {
+                        return data;
+                    } else if ((data.username.toLowerCase().includes(se.toLowerCase())) && (data.is_banided_perm == true && data.is_banided_temp == true)) {
+                        return data;
+                    }
+                }).map((data, index) => <div className='
                  
                       block
                       px-6
@@ -107,8 +119,8 @@ export function Blacklist() {
                         </button>
 
                     </div>
-                </div>))
-            }
+                </div>)}
+
         </div>
 
     </div >
