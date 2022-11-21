@@ -2,22 +2,18 @@
 import { useId, useState } from 'react'
 import axios from "axios";
 
-
-
 export function ModalServicePost() {
     const [showModal, setShowModal] = useState(false);
     const [description, setDescription] = useState(String);
     const [value, setValue] = useState(Number);
-    const [name, setName] = useState("");
+    const [name, setName] = useState(String);
 
-    const client = axios.create({
-        baseURL: "https://nightmarelight.onrender.com" ,
-      });
+    const client = axios.create({baseURL: "https://nightmarelight.onrender.com"});
 
-    async function Post( name: string, value: number,description:string) {
-        const id = localStorage.getItem('id');
+    async function addService( name: string, value: number,description:string) {
+        const userid = localStorage.getItem('id');
         const acesstoken = localStorage.getItem('acetoken');
-        var data = {"name":name,"userid": id,value:value,"description": description}
+        var data = {"name":name,"userid": userid,'value':value,"description": description}
         client.post('/service/create',data ).then(function (response:any) {
             window.location.reload();
             setShowModal(false)
@@ -29,25 +25,12 @@ export function ModalServicePost() {
 
     return (
         <>
-
-            <button className="bg-slate-800 text-[15px] hover:bg-slate-900   
-                      text-white font-bold rounded                       block
-                      px-6
-                      py-5
-                      border border-gray-400 mb-2
-                      w-full
-                      rounded-md
-                    
-                      cursor-pointer
-                      hover:bg-yellow-300 hover:text-black"  onClick={() => setShowModal(true)}>
+            <button className="bg-slate-800 text-[15px] text-white font-bold  block px-6 py-5 border border-gray-400 mb-2 w-full rounded-md cursor-pointer hover:bg-yellow-300 hover:text-black"  onClick={() => setShowModal(true)}>
                <div className='py-5'> Adicionar</div> 
-                
             </button>
             {showModal ? (
                 <>
-                    <div
-                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                    >
+                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                             {/*content*/}
                             <div className="border-0 pt-6 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -59,7 +42,6 @@ export function ModalServicePost() {
                                         <input type="text" placeholder={"Valor"} onChange={(e) => setValue(Number(e.target.value))} className="px-4 py-3 text-base placeholder-gray-400 text-black relative  rounded border-2 outline-none text-left w-full" />
                                     </div>
                                     <div className="py-2 px-4 border-2  bg-white rounded-b-lg  dark:bg-gray-800">
-
                                         <textarea style={{ minHeight: "14vh", minWidth: "90vh", height: "unset" }} id="editor" className="block px-0 w-full text-sm outline-none
                                          text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 
                                           dark:text-white dark:placeholder-gray-400" placeholder={"Descrição do Cargo"} onChange={(e) => setDescription(e.target.value)} />
@@ -75,12 +57,10 @@ export function ModalServicePost() {
                                     >
                                         Close
                                     </button>
-
                                     <button
                                         className="bg-green-500 text-white hover:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-
-                                        onClick={() => Post( name, value ,description)}
+                                        onClick={() => addService( name, value ,description)}
                                     >
                                         Save
                                     </button>

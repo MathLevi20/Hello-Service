@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { flushSync } from 'react-dom'
 import ModalService from '../Services/ModalService'
 import ModalServicePost from '../Services/ModalServicePost'
+import axios from "axios";
+import Nav from '../../components/Nav'
+
 interface Services {
     value: number
     name: string
@@ -11,29 +14,19 @@ interface Services {
     description: string
     id: string
 }
-import axios from "axios";
-import Nav from '../../components/Nav'
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlMjQ2ZWQ1LTNlMDQtNGEyYi05YTJlLTBmMDQyOTdkNWQ1NSIsInVzZXJuYW1lIjoiaGVsbG9tYXN0ZXIiLCJ0eXBlIjoiYWRtaW4iLCJ0b2tlbiI6ImFjZXRva2VuIiwiaWF0IjoxNjY4OTg4ODM0LCJleHAiOjE2Njg5ODk3MzR9.gy0pdnCRzch1rnyRiQPBd8TrFiH4M5gk6MXuvAkaGEA"
 
 export function Services() {
 
-   
     const [data, setData] = useState<Services[]>([])
     const [popupVisible, setPopupVisible] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState(true);
-    console.log(typeof (data))
-    console.log((data))
 
     useEffect(() => {
         const client = axios.create({
-            baseURL: " https://nightmarelight.onrender.com" ,
-
+            baseURL: " https://nightmarelight.onrender.com" 
           });
-          client.get('https://nightmarelight.onrender.com/service', { headers:{'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token
-        }}).then(response =>{
-                const json = response.data;
-                setData(json);
+          client.get('/service', { headers:{'Content-Type': 'application/json'}}).then(response =>{
+                setData(response.data);
             })
             setTimeout(function () {
                 console.log(data);
@@ -52,8 +45,6 @@ export function Services() {
             <div className={`p-7 text-2xl font-semibold flex-1 `}>
                 <h2>Serviços</h2>
             </div>
-
-
             {isLoading ? (<div className="flex items-center justify-center py-24 ">
                 <div className="spinner-border items-center  animate-spin                     transition duration-1000
                         block w-8 h-8 rounded-full m-12" role="status">
@@ -70,15 +61,11 @@ export function Services() {
                         rounded-md
                         text-black
                         cursor-pointer
-                        hover:bg-gray-100
-                        
-                        ' key={data.userid}>
+                        hover:bg-gray-100' 
+                        key={data.userid}>
                     <div className='p-1'>
-
-              
                         <div>{data.name}</div>
                         <div>Valor: {data.value}</div>
-
                     </div>
                     <button onClick={togglePopup} >
                         <ModalService
@@ -90,12 +77,9 @@ export function Services() {
                 <ModalServicePost />
             </div>
             }
-
-
-
-
-
-    </div></>)
+    </div>
+    </>
+    );
 
 
 }

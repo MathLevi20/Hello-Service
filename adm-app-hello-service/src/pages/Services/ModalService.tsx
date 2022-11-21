@@ -10,7 +10,7 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
     const [Title, setTitle] = useState("");
     const acesstoken = localStorage.getItem('acetoken');
     const client = axios.create({
-        baseURL: "https://nightmarelight.onrender.com" ,
+        baseURL: "https://nightmarelight.onrender.com" 
       });
     console.log(id)
     async function Delete(id: string) {
@@ -30,25 +30,16 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
     }
     return (
         <>
-            <button
-                className="bg-slate-800 text-[12px]  hover:bg-slate-900 text-white font-bold py-2 px-5 rounded ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(true)}
-            >
-                Ver mais
+            <button className="bg-slate-800 text-[12px]  hover:bg-slate-900 text-white font-bold py-2 px-5 rounded ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(true)}>
+                    Ver mais
             </button>
             {showModal ? (
                 <>
-                    <div
-                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                    >
+                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                            {/*content*/}
                             <div className="border-0 pt-6 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                {/*header*/}
-
-
-
                                 {/*body*/}
                                 <div className="relative p-6 flex-auto">
                                     <div className="mb-3 pt-0">
@@ -60,21 +51,20 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
                                          text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0
                                           dark:text-white dark:placeholder-gray-400" defaultValue={descricao} onChange={(e) => setDesc(e.target.value)} />
                                     </div>
-
                                 </div>
                                 {/*footer*/}
                                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                                  <button
-                                        className="text-red-500 hover:bg-red-700 hover:text-white background-transparent font-bold uppercase px-6 py-3   rounded  text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        type="button"
-                                        onClick={() => setShowModal(false)}
+                                    className="text-red-500 hover:bg-red-700 hover:text-white background-transparent font-bold uppercase px-6 py-3   rounded  text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => setShowModal(false)}
                                     >
                                         Close
                                     </button>
                                     <button
-                                        className="bg-slate-800 hover:bg-slate-900 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                        type="button"
-                                        onClick={() => { Delete(id) }}
+                                    className="bg-slate-800 hover:bg-slate-900 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button"
+                                    onClick={() => { Delete(id) }}
                                     >
                                         Delete
                                     </button>
