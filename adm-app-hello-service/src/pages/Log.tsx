@@ -1,6 +1,7 @@
 ﻿
 import { useEffect, useState } from 'react'
 import useFetch from 'react-fetch-hook';
+import Nav from '../components/Nav';
 
 interface User_Ban {
     id: number
@@ -64,7 +65,7 @@ export function Log() {
         })
     }
     console.log(data)
-    return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
+    return (<> <Nav/><div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
         <div className={`p-7 text-2xl font-semibold flex-1 `}>
             <h2>Logs</h2>
         </div>
@@ -128,6 +129,7 @@ export function Log() {
         </div>
 
     </div >
+    </>)
 }
 
 export default Log

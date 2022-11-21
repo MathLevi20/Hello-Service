@@ -3,7 +3,7 @@ import Nav from "./components/Nav";
 import Accounts from "./pages/Accounts";
 import Blacklist from "./pages/Blacklist";
 import Folder from "./pages/Folder";
-import Inbox, { Services } from "./pages/Services";
+import  Services  from "./pages/Services/Index";
 import Schedule from "./pages/Schedule";
 import Search from "./pages/Search";
 import Settings from "./pages/Settings";
@@ -21,10 +21,12 @@ export function App() {
     
 
         <div className="flex row-auto ">
-
-         <Nav/>
-          <Fragment>
+        
+     
+       
           <Routes>
+          <Route path="/" element={<Accounts />} />
+
             <Route path="/Accounts" element={<Accounts />} />
             <Route path="/Blacklist" element={<Blacklist />} />
             <Route path="/Log" element={<Log />} />
@@ -38,7 +40,7 @@ export function App() {
             <Route path="/Settings" element={<Settings />} />
             <Route path="/User/:userId" element={<User1 />} />
           </Routes>
-          </Fragment>
+
         </div>
       </BrowserRouter>
       )

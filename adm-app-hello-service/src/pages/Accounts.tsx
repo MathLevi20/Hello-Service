@@ -3,6 +3,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import useFetch from 'react-fetch-hook';
+import Nav from '../components/Nav';
 
 interface User {
     id: string
@@ -53,7 +54,7 @@ export function Accounts() {
     };
     console.log(data)
     console.log(typeof (se))
-    return <div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
+    return (<> <Nav/><div className='flex-1 p-10  font-bold h-screen overflow-y-auto'>
         <div className={`py-6 text-2xl font-semibold flex-1 `}>
             <h2>Accounts</h2>
         </div>
@@ -127,7 +128,7 @@ export function Accounts() {
             </>
         </div>
 
-    </div>
+    </div></>)
 }
 
 export default Accounts
