@@ -1,4 +1,4 @@
-{
+﻿{
   "Usuarios": [
     {
       "id": "de81d998-aea0-4090-b11d-0f46943bedc8",
@@ -180,18 +180,20 @@
       "by": "Bruno"
     }
   ],
-  "Services": [
+  "service": [
     {
-      "id": 0,
-      "Nome": "Cozinheiro",
-      "User_ative": 100,
-      "Descrição": "Um cozinheiro é o profissional que prepara os mais diversos tipos de pratos culinários - refeição, lanche, sobremesa, entrada, salada, acompanhamento e outros. Está sob a responsabilidade do cozinheiro manipular e temperar alimentos, verificar o estado de conservação dos ingredientes, gerenciar estoque de produtos, manipular utensílios de cozinha, manter a organização e limpeza do ambiente de trabalho."
+      "id": "dd388bdc-8988-40e9-ad58-f950f6ec3efd",
+      "name": "cozinheiro",
+      "description": "responsável por preparar refeições em geral",
+      "value": 70,
+      "creator": "de246ed5-3e04-4a2b-9a2e-0f04297d5d55"
     },
     {
-      "id": 1,
-      "Nome": "Garçom",
-      "User_ative": 1000,
-      "Descrição": "Serve alimentos e bebidas aos clientes, anota pedidos e organiza e limpa mesas e cadeiras em restaurantes, bares, hotéis e eventos."
+      "id": "576bcf3a-35f8-4d18-87a8-ea433e0c9581",
+      "name": "segurança",
+      "description": "proteger e mediar conflitos",
+      "value": 120,
+      "creator": "de246ed5-3e04-4a2b-9a2e-0f04297d5d55"
     }
   ],
   "Contract": [

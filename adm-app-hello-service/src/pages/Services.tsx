@@ -5,38 +5,40 @@ import { flushSync } from 'react-dom'
 import ModalService from '../components/ModalService'
 import ModalServicePost from '../components/ModalServicePost'
 interface Services {
-    id: number
-    Nome: string
-    User_ative: string
-    Descrição: string
+    value: number
+    name: string
+    userid: string
+    description: string
 }
+import axios from "axios";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlMjQ2ZWQ1LTNlMDQtNGEyYi05YTJlLTBmMDQyOTdkNWQ1NSIsInVzZXJuYW1lIjoiaGVsbG9tYXN0ZXIiLCJ0eXBlIjoiYWRtaW4iLCJ0b2tlbiI6ImFjZXRva2VuIiwiaWF0IjoxNjY4OTg4ODM0LCJleHAiOjE2Njg5ODk3MzR9.gy0pdnCRzch1rnyRiQPBd8TrFiH4M5gk6MXuvAkaGEA"
 
 export function Services() {
 
+   
     const [data, setData] = useState<Services[]>([])
     const [popupVisible, setPopupVisible] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState(true);
-
     console.log(typeof (data))
     console.log((data))
+
     useEffect(() => {
-        const getUser = async () => {
-            const URL = 'http://localhost:3000/Services'
-            const init: RequestInit = {
-                method: 'GET'
-            }
+        const client = axios.create({
+            baseURL: " http://localhost:3000" ,
 
-            const response = await fetch(URL, init)
-            const data = await response.json()
-
-            setData(data)
+          });
+            const da = client.get('/service', { headers: { 'Authorization': token} }).then(response =>{
+                const json = response.data;
+                console.log('json', json);
+                setData(json);
+            })
+            console.log(da)
+            console.log(da)
+            console.log(da)
             setTimeout(function () {
-                console.log("Delayed for 5 second.");
+                console.log(data);
                 setIsLoading(false);
-            }, 400);
-        }
-
-        getUser()
+            }, 500);
 
     }, [])
     function togglePopup() {
@@ -67,18 +69,18 @@ export function Services() {
                       cursor-pointer
                       hover:bg-gray-100
                      
-                    ' key={data.id}>
+                    ' key={data.userid}>
                 <div className='p-1'>
 
-                    <div>{data.Nome}</div>
-                    <div>Ativos:{data.User_ative}</div>
+                    <div>{data.name}</div>
+                    <div>Valor:{data.userid}</div>
 
                 </div>
                 <button onClick={togglePopup} >
                     <ModalService
-                        descricao={data.Descrição}
-                        title={data.Nome}
-                        id={data.id} />
+                        descricao={data.description}
+                        title={data.name}
+                        id={data.userid} />
                 </button>
             </div>))}
             <ModalServicePost descricao={''} title={''} id={(Object.keys(data).length) + 2} />

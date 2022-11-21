@@ -4,12 +4,12 @@ import { useState } from 'react'
 import React from "react";
 
 
-export function ModalService({ descricao, title, id }: { descricao: string, title: string, id: number }) {
+export function ModalService({ descricao, title, id }: { descricao: string, title: string, id: string }) {
     const [showModal, setShowModal] = useState(false);
     const [Desc, setDesc] = useState("");
     const [Title, setTitle] = useState("");
 
-    async function PUT(title: string, descricao: string, id: number) {
+    async function PUT(title: string, descricao: string, id: string) {
         const addRecordEndpoint = "http://localhost:3000/Services/" + id;
         const options = {
             method: 'PUT',
@@ -32,7 +32,7 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
         console.log(jsonResponse);
 
     }
-    async function Delete(id: number) {
+    async function Delete(id: string) {
         const addRecordEndpoint = "http://localhost:3000/Services/" + id;
         const options = {
             method: 'DELETE',
@@ -53,16 +53,16 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
     }
     async function Pot (){
         if (Desc == "" && Title == ""){
-            PUT(title, descricao, Number(id) )
+            PUT(title, descricao, String(id) )
         }
         else if (Desc == ""){
-            PUT(Title, descricao, Number(id) )
+            PUT(Title, descricao, String(id) )
         }
         else if (Title == ""){
-            PUT(title, Desc, Number(id) )
+            PUT(title, Desc, String(id) )
         }
         else{
-            PUT(Title, Desc, Number(id) )
+            PUT(Title, Desc, String(id) )
         }
     
         }
