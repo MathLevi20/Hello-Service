@@ -13,7 +13,7 @@ export function ModalServicePost() {
     async function addService( name: string, value: number,description:string) {
         const userid = localStorage.getItem('id');
         const acesstoken = localStorage.getItem('acetoken');
-        var data = {"name":name,"userid": userid,'value':value,"description": description}
+        var data = {"name":name,"userid": userid,"value":value,"description": description}
         client.post('/service/create',data ).then(function (response:any) {
             window.location.reload();
             setShowModal(false)

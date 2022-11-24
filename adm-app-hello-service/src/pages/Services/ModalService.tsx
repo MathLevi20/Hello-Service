@@ -14,7 +14,7 @@ export function ModalService({ descricao, title, id }: { descricao: string, titl
       });
     console.log(id)
     async function Delete(id: string) {
-        const b = client.delete("/service/delete", {
+        client.delete("/service/delete", {
             data: {
             "ServiceId": id
             },         headers: {

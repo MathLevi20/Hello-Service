@@ -1,4 +1,4 @@
-﻿{
+{
   "Usuarios": [
     {
       "id": "de81d998-aea0-4090-b11d-0f46943bedc8",
@@ -14,7 +14,7 @@
       "zip_code": "64049-049",
       "state": "Konoha",
       "cyte": "Vila da Folha",
-      "is_banided_perm": true,
+      "is_banided_perm": false,
       "is_banided_temp": false,
       "created_at": "2022-11-09T03:38:54.262Z",
       "updated_at": "2022-11-09T03:38:54.262Z",
