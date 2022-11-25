@@ -1,5 +1,7 @@
 ﻿import React, { useEffect, useState } from 'react'
 import { Await, useParams } from 'react-router-dom';
+import Nav from '../components/Nav';
+import Comments from '../components/Users/Comments';
 
 interface User {
   [x: string]: any;
@@ -7,6 +9,18 @@ interface User {
   Nome: string
   cpf: string
   comments: [any]
+}
+function timeConverter(UNIX_timestamp:any){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
 }
 function User1() {
   const [data, setData1_] = useState<User[]>([]);
@@ -36,19 +50,23 @@ function User1() {
   console.log((data))
   console.log((Commnets))
   return (
-    <div className="bg-gray-900 px-10 h-screen overflow-y-auto w-full">
-      <div className='mx-auto mt-10 text-white'> {data.map((data: any) =>
+  <>
+  <Nav/>
+    <div className="  h-screen overflow-y-auto w-full">
+      <div className='mx-auto pt-8 bg-yellow-300 text-gray-800'> {data.map((data: any) =>
         <div className=''>
-          <div >
-            <div className='flex border-2 border-inherit rounded-lg p-3'>
-              <img src={data.avatar} className="w-24 h-24 m-auto gap-0.5" />
-              <div className='flex flex-col  my-auto mx-2 '>
-                <div>Id : {data.id}</div>
+          <div className=''>
+            <div className='flex border-inherit rounded-lg w-fit mx-auto py-2  px-3'>
+              <div className='object-center my-auto mx-3'><img src={data.avatar} className="w-24 rounded-full h-24" /></div>
+            
+            <div>
+              <div className='flex flex-col my-auto mx-3 pt-4 '>
                 <div>User : {data.username}</div>
                 <div>Name : {data.first_name} {data.last_name}</div>
                 <div>Description : {data.description}</div>
                 <div>CEP : {data.zip_code}</div>
               </div>
+             </div>
               <div className='flex flex-col mx-2 gap-2'>
                 <button className='bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded' color="">Banir Temporariamente</button>
                 <button className='bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded' color="">Banir Permanentemente</button>
@@ -63,71 +81,36 @@ function User1() {
       )}
 
       </div>
-      <div className={`p-2 text-2xl font-semibold flex-1 text-white `}>
+
+      <div className='bg-gray-900 px-10 py-2   '>
+      <div className='bg-black-900 '>
+
+      <div className={`p-2 text-xl font-semibold flex-1 text-white `}>
         <h2>Evaluation</h2>
       </div>
-      <div className='mx-auto  text-white'> {Ava.map((data: any) =>
-        <div className=' '>
-          <div >
-            <div className='flex m-2 border-2 border-inherit rounded-lg p-3'>
-              <div className='flex flex-col  my-auto mx-2 '>
-                <div>Time : {data.time}</div>
-                <div>Mensager: {data.msg}</div>
-                <div>By: {data.by}</div>
-                <div>For : {data.for}</div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-      )}
-
+        {Ava.map((data: any) => <Comments by={data.by} msg={data.msg} time={timeConverter(data.time)}/>
+          )}
       </div>
-      <div className={`p-2 text-2xl font-semibold  text-white  flex-1 `}>
+      <div className={`p-2 text-xl font-semibold  text-white  flex-1 `}>
         <h2>Comments</h2>
       </div>
-      <div className='mx-auto text-white '> {Ava.map((data: any) =>
-        <div className=''>
-          <div >
-            <div className='flex m-2 border-2 border-inherit rounded-lg p-3'>
-              <div className='flex flex-col  my-auto mx-2 '>
-                <div>Time : {data.time}</div>
-                <div>Mensager: {data.msg}</div>
-                <div>By: {data.by}</div>
-                <div>For : {data.for}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      )}
-
+      <div>
+        {Commnets.map((data: any) => <Comments by={data.by} msg={data.msg} time={timeConverter(data.time)}/>
+          )}
       </div>
-      <div className={`p-2 text-2xl font-semibold  text-white  flex-1 `}>
+      <div className={`p-2 text-xl font-semibold  text-white  flex-1 `}>
         <h2>Denuncias</h2>
       </div>
       <div className='mx-auto text-white '> {den.map((data: any) =>
-        <div className=''>
-          <div >
-            <div className='flex m-2 border-2 border-inherit rounded-lg p-3'>
-              <div className='flex flex-col  my-auto mx-2 '>
-                <div>Time : {data.time}</div>
-                <div>Mensager: {data.msg}</div>
-                <div>By: {data.by}</div>
-                <div>For : {data.for}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <Comments by={data.by} msg={data.msg} time={timeConverter(data.time)}/>
       )}
-
-      </div>
     </div>
+    </div>
+    </div>
+    
+  </>
   )
+      }
 
-}
 
 export default User1

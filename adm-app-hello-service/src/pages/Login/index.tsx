@@ -21,7 +21,7 @@ export const Login = () => {
 
       });
 
-
+    
     const handleLogin = async () => {
         if (username && password) {
             const isLogged = await client.post('/auth/signin', {
@@ -32,10 +32,11 @@ export const Login = () => {
                 localStorage.setItem('reftoken',response.data.reftoken);
                 localStorage.setItem('id',response.data.id);
                 if (response.data.signin === true){
+                 
                     return navigate("/Services")}
                 else
+                    alert("senha errada")
                     return navigate("/Login")
-
         })
               .catch(function (error:any) {
                 console.error(error);
@@ -60,7 +61,6 @@ export const Login = () => {
             />
             <input
                 className="p-2 mt-2 border-black-900 border"
-
                 type="password"
                 value={password}
                 onChange={handlePasswordInput}

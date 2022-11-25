@@ -91,8 +91,8 @@ export function Contract_list() {
                       hover:bg-gray-100
                         text-[20px]
                     ' key={data.id}>
-                            <div className='flex justify-between'>
-                                <button onClick={() => { setid(data.id), setname(data.Name), settext(data.Text) }} >
+                            <div className='flex justify-between ' onClick={() => { setid(data.id), setname(data.Name), settext(data.Text) }}>
+                                <button>
                                     {data.Name}
                                 </button>
                                 <button onClick={() => Delete(data.id)}>
