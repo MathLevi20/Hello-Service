@@ -33,7 +33,7 @@ const PublicRouter = ({ children }: IProps) => {
     )
   }
 
-  return !authData ? children : <Navigate to="/schedule" replace />
+  return !authData ? children : <Navigate to="/examplePage" replace />
 }
 
 const App = () => {
@@ -50,7 +50,7 @@ const App = () => {
             }
           />
           <Route
-            path="/schedule"
+            path="/examplePage"
             element={
               <PrivateRouter>
                 <ExamplePage />

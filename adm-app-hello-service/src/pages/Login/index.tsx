@@ -81,7 +81,7 @@ export const Login = () => {
             placeholder="Digite sua senha"
           />
           <button className="mt-2 p-2 rounded-md bg-slate-600" onClick={handleSignIn}>
-            Logar
+            {loading ? '...' : 'Logar'}
           </button>
         </div>
       </div>
