@@ -23,8 +23,6 @@ const PrivateRouter = ({ children }: IProps) => {
 const PublicRouter = ({ children }: IProps) => {
   const { authData } = useAuth()
 
-  console.log(authData)
-
   if (authData === undefined) {
     return (
       <div>

@@ -68,16 +68,22 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
     try {
       const response = await api.post('/auth/signin', { username: email, password })
       const data = response.data
-      const token = data.acetoken
-      const decodeData = _decodedToken(token) as IUser
 
-      const authDataFormatter: IAuthData = {
-        token: token,
-        user: decodeData
+      if (data) {
+        const token = data.acetoken
+
+        const decodeData = _decodedToken(token) as IUser
+
+        const authDataFormatter: IAuthData = {
+          token: token,
+          user: decodeData
+        }
+
+        _saveInStorage(authDataFormatter)
+        setAuthData(authDataFormatter)
+      } else {
+        setAuthData(null)
       }
-
-      setAuthData(authDataFormatter)
-      _saveInStorage(authDataFormatter)
     } catch (err) {
       const error = err as AxiosError
 
