@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import {
   createContext,
   ReactNode,
@@ -7,16 +8,14 @@ import {
   useMemo,
   useState
 } from 'react'
+import { decodeToken } from 'react-jwt'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../services/client'
 
 interface IUser {
   id: string
-  name: string
-  cpf: string
-  userName: string
-  isPermanentlyBanned: boolean
-  isTemporaryBanned: boolean
+  username: string
+  type: boolean
 }
 interface IAuthData {
   user: IUser
@@ -49,6 +48,11 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
   const _removeInStorage = () => {
     localStorage.removeItem('@user')
   }
+  const _decodedToken = (token: string) => {
+    const decodedData = decodeToken(token)
+
+    return decodedData
+  }
   const _readInStorage = useCallback(() => {
     const authData = localStorage.getItem('@user')
 
@@ -62,15 +66,23 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
   }, [])
   const signIn = useCallback(async ({ email, password }: IAuthParams) => {
     try {
-      const response = await api.post('/', { email, password })
-      const data = response.data as IAuthData
+      const response = await api.post('/auth/signin', { username: email, password })
+      const data = response.data
+      const token = data.acetoken
+      const decodeData = _decodedToken(token) as IUser
 
-      console.log(data)
-      /* setAuthData(data)
-      _saveInStorage(data) */
+      const authDataFormatter: IAuthData = {
+        token: token,
+        user: decodeData
+      }
+
+      setAuthData(authDataFormatter)
+      _saveInStorage(authDataFormatter)
     } catch (err) {
+      const error = err as AxiosError
+
       //baixa o toastfy -> npm e substitui no lugar no console
-      console.log(err)
+      throw new Error(error.message)
     }
   }, [])
   const signOut = useCallback(() => {

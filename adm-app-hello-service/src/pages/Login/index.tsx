@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useState } from 'react'
 import { redirect, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/Auth/AuthContext'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { useAuth } from '../../contexts/auth_context'
 
 export const Login = () => {

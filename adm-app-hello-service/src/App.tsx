@@ -1,6 +1,7 @@
 import React, { ReactElement, useContext } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthContextProvider, useAuth } from './contexts/auth_context'
+import { ExamplePage } from './pages/example_page'
 import { Login } from './pages/Login'
 
 interface IProps {
@@ -32,7 +33,7 @@ const PublicRouter = ({ children }: IProps) => {
     )
   }
 
-  return !authData ? children : <Navigate to="/" replace />
+  return !authData ? children : <Navigate to="/schedule" replace />
 }
 
 const App = () => {
@@ -46,6 +47,14 @@ const App = () => {
               <PublicRouter>
                 <Login />
               </PublicRouter>
+            }
+          />
+          <Route
+            path="/schedule"
+            element={
+              <PrivateRouter>
+                <ExamplePage />
+              </PrivateRouter>
             }
           />
         </Routes>
