@@ -69,7 +69,7 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
       const response = await api.post('/auth/signin', { username: email, password })
       const data = response.data
 
-      if (data) {
+      if (data.signin) {
         const token = data.acetoken
 
         const decodeData = _decodedToken(token) as IUser
@@ -85,10 +85,8 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
         setAuthData(null)
       }
     } catch (err) {
-      const error = err as AxiosError
-
-      //baixa o toastfy -> npm e substitui no lugar no console
-      throw new Error(error.message)
+      setAuthData(null)
+      console.log(err)
     }
   }, [])
   const signOut = useCallback(() => {
