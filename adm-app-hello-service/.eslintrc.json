@@ -1,0 +1,82 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-hooks",
+        "@typescript-eslint",
+        "prettier"
+
+    ],
+    "rules": {
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "semi": "off",
+      "react/require-default-props": "off",
+      "react/react-in-jsx-scope": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/no-unstable-nested-components": "warn",
+      "react/jsx-props-no-spreading": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "react/jsx-key": "warn",
+      "react/jsx-no-useless-fragment": "warn",
+      "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+      "import/prefer-default-export": "off",
+      "camelcase": "off",
+      "@typescript-eslint/ban-types": "off",
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "_"
+        }
+      ],
+
+      "prettier/prettier": ["error", {
+        "endOfLine": "auto"
+      }, { "usePrettierrc": true }],
+      "react/function-component-definition": [
+        2,
+        {
+            "namedComponents": "arrow-function",
+            "unnamedComponents": "arrow-function"
+        }
+      ],
+      "padding-line-between-statements": [
+          "error",
+          {
+            "blankLine": "always",
+            "prev": ["*"],
+            "next": ["return", "export"]
+          },
+          { "blankLine": "always",
+            "prev": ["const", "let", "var"],
+            "next": "*"
+          },
+          { "blankLine": "any",
+            "prev": ["const", "let", "var"],
+            "next": ["const", "let", "var"]
+          }
+      ]
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    }
+}
