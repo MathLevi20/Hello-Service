@@ -11,13 +11,18 @@ export const ModalServicePost = () => {
 
   async function addService(name: string, value: number, description: string) {
     const userid = localStorage.getItem('id')
-    const acesstoken = localStorage.getItem('acetoken')
-    const data = { name: name, userid: userid, value: value, description: description }
+    const acesstoken = JSON.parse(localStorage.getItem('@user') || 'false')
+    const acesstoke1 = acesstoken.user.id
+    const data = { name: name, userid: acesstoke1, value: value, description: description }
 
+    console.log(acesstoke1)
+    console.log(data)
+    console.log(data)
+    console.log(acesstoken)
+    console.log(typeof acesstoken)
     client
       .post('/service/create', data)
       .then(function (response: any) {
-        window.location.reload()
         setShowModal(false)
       })
       .catch(function (error: any) {

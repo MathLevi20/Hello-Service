@@ -1,4 +1,4 @@
-﻿{
+{
   "Usuarios": [
     {
       "id": "de81d998-aea0-4090-b11d-0f46943bedc8",
@@ -84,7 +84,256 @@
     },
     {
       "id": "71ee2ce6-5e67-4b58-9277-a27861bfea19",
-      "username": "Sasukeee",
+      "username": "teste02",
+      "first_name": "Sasuke",
+      "last_name": "Uchiha",
+      "password": "$2a$10$/hMTJtmJTCrg9Fk8tcewNOlbcGy23cMfgH/HtzxVyTgDulnzC8kXC",
+      "phone_number": "8697899898",
+      "email": "sasuke@gmail.com",
+      "avatar": "/src/assets/Mock/Sasuke.jpg",
+      "avegarge_rating": null,
+      "description": "tenho boas visão,força e agilidade",
+      "zip_code": "64049-049",
+      "state": "Konoha",
+      "cyte": "Vila da Folha",
+      "is_banided_perm": true,
+      "is_banided_temp": false,
+      "created_at": "2022-11-09T03:39:12.542Z",
+      "updated_at": "2022-11-09T03:39:12.542Z",
+      "is_activate": true,
+      "is_appointed": false,
+      "cpf": "1123456789",
+      "value": false,
+      "evaluation": [
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "by": "Sasuke",
+          "for": "Naruto",
+          "by_id": "Sasuke",
+          "for_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ],
+      "denunciation": [
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "by": "Sasuke",
+          "for": "Naruto",
+          "by_id": "Sasuke",
+          "for_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ],
+      "comments": [
+        {
+          "id": "71ee2c11e6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ]
+    },
+    {
+      "id": "71ee2ce6-5e67-4b58-9277-a27861bfea19",
+      "username": "Teste",
+      "first_name": "Sasuke",
+      "last_name": "Uchiha",
+      "password": "$2a$10$/hMTJtmJTCrg9Fk8tcewNOlbcGy23cMfgH/HtzxVyTgDulnzC8kXC",
+      "phone_number": "8697899898",
+      "email": "sasuke@gmail.com",
+      "avatar": "/src/assets/Mock/Sasuke.jpg",
+      "avegarge_rating": null,
+      "description": "tenho boas visão,força e agilidade",
+      "zip_code": "64049-049",
+      "state": "Konoha",
+      "cyte": "Vila da Folha",
+      "is_banided_perm": false,
+      "is_banided_temp": false,
+      "created_at": "2022-11-09T03:39:12.542Z",
+      "updated_at": "2022-11-09T03:39:12.542Z",
+      "is_activate": true,
+      "is_appointed": false,
+      "cpf": "1123456789",
+      "value": false,
+      "evaluation": [
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "by": "Sasuke",
+          "for": "Naruto",
+          "by_id": "Sasuke",
+          "for_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ],
+      "denunciation": [
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "by": "Sasuke",
+          "for": "Naruto",
+          "by_id": "Sasuke",
+          "for_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ],
+      "comments": [
+        {
+          "id": "71ee2c11e6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ]
+    },
+    {
+      "id": "71ee2ce6-5e67-4b58-9277-a27861bfea19",
+      "username": "teste02",
+      "first_name": "Sasuke",
+      "last_name": "Uchiha",
+      "password": "$2a$10$/hMTJtmJTCrg9Fk8tcewNOlbcGy23cMfgH/HtzxVyTgDulnzC8kXC",
+      "phone_number": "8697899898",
+      "email": "sasuke@gmail.com",
+      "avatar": "/src/assets/Mock/Sasuke.jpg",
+      "avegarge_rating": null,
+      "description": "tenho boas visão,força e agilidade",
+      "zip_code": "64049-049",
+      "state": "Konoha",
+      "cyte": "Vila da Folha",
+      "is_banided_perm": false,
+      "is_banided_temp": false,
+      "created_at": "2022-11-09T03:39:12.542Z",
+      "updated_at": "2022-11-09T03:39:12.542Z",
+      "is_activate": true,
+      "is_appointed": false,
+      "cpf": "1123456789",
+      "value": false,
+      "evaluation": [
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          "by": "Sasuke",
+          "for": "Naruto",
+          "by_id": "Sasuke",
+          "for_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ],
+      "denunciation": [
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "by": "Sasuke",
+          "for": "Naruto",
+          "by_id": "Sasuke",
+          "for_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ],
+      "comments": [
+        {
+          "id": "71ee2c11e6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        },
+        {
+          "id": "71ee2ce6",
+          "time": "193213",
+          "msg": "Sasukeee",
+          "for": "Sasuke",
+          "by": "Naruto",
+          "for_id": "Sasuke",
+          "by_id": "Sasuke"
+        }
+      ]
+    },
+    {
+      "id": "71ee2ce6-5e67-4b58-9277-a27861bfea19",
+      "username": "teste03",
       "first_name": "Sasuke",
       "last_name": "Uchiha",
       "password": "$2a$10$/hMTJtmJTCrg9Fk8tcewNOlbcGy23cMfgH/HtzxVyTgDulnzC8kXC",
@@ -208,11 +457,9 @@
       "id": 3
     },
     {
-      
       "Name": "Teste",
       "Text": "asdasd",
       "id": 4
-
     }
   ]
 }

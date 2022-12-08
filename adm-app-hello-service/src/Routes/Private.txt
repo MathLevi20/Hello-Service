@@ -1,17 +1,16 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Accounts from '../pages/Accounts'
-import Blacklist from '../pages/Blacklist'
+//
+/*import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Accounts from '../pages/Accounts/Accounts'
+import Blacklist from '../pages/Blacklist/Blacklist'
 import Folder from '../pages/Folder'
 import Services from '../pages/Services/Index'
 import Schedule from '../pages/Schedule'
 import Search from '../pages/Search'
 import Settings from '../pages/Settings'
-import Log from '../pages/Log'
-import Contract from '../pages/Contract'
-import User1 from '../pages/User'
-import Register from '../pages/Register'
-import { Login } from '../pages/Login/index'
-import { Fragment } from 'react'
+import Log from '../pages/Log/Log'
+import Contract from '../pages/Contract/Contract'
+import User1 from '../pages/User/User'
+import Register from '../pages/Register/Register'
 
 export const PrivateRoutes = () => {
   return (
@@ -37,3 +36,4 @@ export const PrivateRoutes = () => {
 }
 
 export default PrivateRoutes
+*/

@@ -3,7 +3,7 @@ import { flushSync } from 'react-dom'
 import ModalService from '../ModalService'
 import ContractPost from './PostContract'
 import Set from './PutContract'
-import Contract from '../../pages/Contract'
+import Contract from '../../pages/Contract/Contract'
 interface Contract {
   id: number
   Name: string
@@ -53,8 +53,6 @@ export const Contract_list = () => {
       window.location.reload()
     })
 
-    if (jsonResponse) {
-    }
     console.log(Boolean(jsonResponse))
   }
 

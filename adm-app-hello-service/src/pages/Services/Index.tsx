@@ -4,9 +4,10 @@ import ModalService from '../Services/ModalService'
 import ModalServicePost from '../Services/ModalServicePost'
 import axios from 'axios'
 import Nav from '../../components/Nav'
+import Loading from '../../components/Loading'
 
 interface Services {
-  value: number
+  price: number
   name: string
   userid: string
   description: string
@@ -36,29 +37,21 @@ export const Services = () => {
   }
 
   return (
-    <>
-      <Nav />
-      <div className="flex-1 p-10  font-bold h-screen overflow-y-auto">
-        <div className={`p-7 text-2xl font-semibold flex-1 `}>
-          <h2>Serviços</h2>
-        </div>
-        {isLoading ? (
-          <div className="flex items-center justify-center py-24 ">
+    <div className="flex-1 p-6 font-bold h-screen overflow-y-auto">
+      <div className={`py-2 mb-4 text-2xl font-semibold flex-1 `}>
+        <h2>Serviços</h2>
+      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <ModalServicePost />
+          {data.map((data) => (
             <div
-              className="spinner-border items-center  animate-spin                     transition duration-1000
-                        block w-8 h-8 rounded-full m-12"
-              role="status"
-            >
-              <img src="./src/assets/loading.png" width="40" />
-            </div>
-          </div>
-        ) : (
-          <div className=" grid grid-cols-4  gap-4">
-            {data.map((data) => (
-              <div
-                className="
+              className="
                         block
-                        px-6
+                        px-2
+                        md:px-5
                         py-3
                         border border-gray-400 mb-2
                         w-full
@@ -66,22 +59,20 @@ export const Services = () => {
                         text-black
                         cursor-pointer
                         hover:bg-gray-100"
-                key={data.userid}
-              >
-                <div className="p-1">
-                  <div>{data.name}</div>
-                  <div>Valor: {data.value}</div>
-                </div>
-                <button onClick={togglePopup}>
-                  <ModalService descricao={data.description} title={data.name} id={data.id} />
-                </button>
+              key={data.userid}
+            >
+              <div className="p-1">
+                <div>{data.name}</div>
+                <div>R$ {data.price}</div>
               </div>
-            ))}
-            <ModalServicePost />
-          </div>
-        )}
-      </div>
-    </>
+              <button onClick={togglePopup}>
+                <ModalService descricao={data.description} title={data.name} id={data.id} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 

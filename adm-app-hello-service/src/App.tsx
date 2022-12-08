@@ -1,8 +1,17 @@
 import React, { ReactElement, useContext } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import Contract from './pages/Contract/Contract'
 import { AuthContextProvider, useAuth } from './contexts/auth_context'
-import { ExamplePage } from './pages/example_page'
+import Accounts from './pages/Accounts/Accounts'
+import Blacklist from './pages/Blacklist/Blacklist'
+import { ExamplePage } from './pages/Exemple/index'
+import Log from './pages/Log/Log'
 import { Login } from './pages/Login'
+import Services from './pages/Services/Index'
+import Settings from './pages/Settings/Index'
+import User from './pages/User/Index'
+import Nav from './components/Nav'
+import Dashboard from './pages/Dashboard/Index'
 
 interface IProps {
   children: ReactElement
@@ -31,31 +40,101 @@ const PublicRouter = ({ children }: IProps) => {
     )
   }
 
-  return !authData ? children : <Navigate to="/examplePage" replace />
+  return !authData ? children : <Navigate to="/Accounts" replace />
 }
 
 const App = () => {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PublicRouter>
-                <Login />
-              </PublicRouter>
-            }
-          />
-          <Route
-            path="/examplePage"
-            element={
-              <PrivateRouter>
-                <ExamplePage />
-              </PrivateRouter>
-            }
-          />
-        </Routes>
+        <div className="flex row-auto ">
+          <PrivateRouter>
+            <Nav />
+          </PrivateRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRouter>
+                  <Login />
+                </PublicRouter>
+              }
+            />
+            <Route
+              path="/examplePage"
+              element={
+                <PrivateRouter>
+                  <ExamplePage />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Dashboard"
+              element={
+                <PrivateRouter>
+                  <Dashboard />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Accounts"
+              element={
+                <PrivateRouter>
+                  <Accounts />
+                </PrivateRouter>
+              }
+            />
+
+            <Route
+              path="/Blacklist"
+              element={
+                <PrivateRouter>
+                  <Blacklist />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Log"
+              element={
+                <PrivateRouter>
+                  <Log />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Contract"
+              element={
+                <PrivateRouter>
+                  <Contract />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Services"
+              element={
+                <PrivateRouter>
+                  <Services />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Settings"
+              element={
+                <PrivateRouter>
+                  <Settings />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/User/:userId"
+              element={
+                <PrivateRouter>
+                  <User />
+                </PrivateRouter>
+              }
+            />
+          </Routes>
+        </div>
       </AuthContextProvider>
     </BrowserRouter>
   )

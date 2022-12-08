@@ -50,9 +50,8 @@ export const ModalService = ({
       window.location.reload()
     })
 
-    if (jsonResponse) {
-      setShowModal(false)
-    }
+    setShowModal(false)
+
     console.log(Boolean(jsonResponse))
   }
   async function Pot() {

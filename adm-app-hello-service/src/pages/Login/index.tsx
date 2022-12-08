@@ -26,8 +26,10 @@ export const Login = () => {
     setLoading(true)
     try {
       await signIn({ email: username, password })
+      console.log('finalizado')
     } catch (err) {
       console.log(err)
+      setLoading(false)
     } finally {
       setLoading(false)
     }
@@ -45,6 +47,7 @@ export const Login = () => {
           localStorage.setItem('acetoken', response.data.acetoken)
           localStorage.setItem('reftoken', response.data.reftoken)
           localStorage.setItem('id', response.data.id)
+          console.log('asv')
           if (response.data.signin === true) {
             return navigate('/Services')
           } else alert('senha errada')
@@ -62,7 +65,7 @@ export const Login = () => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="grid grid-rows-1 bg-slate-500 p-10  rounded-md ">
           <img
-            src="/src/assets/logo.svg"
+            src="https://ojkprgyzivdeqwjymnvn.supabase.co/storage/v1/object/sign/admin/Components/logo.svg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhZG1pbi9Db21wb25lbnRzL2xvZ28uc3ZnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwNTA2ODIwLCJleHAiOjE5ODU4NjY4MjB9.eK6Q4dwfLv-BVCrdpt4uaMDz5XG--wXbck0thnEGSDg"
             className={`cursor-pointer pb-7 mx-auto p-3"`}
             width="100"
           />

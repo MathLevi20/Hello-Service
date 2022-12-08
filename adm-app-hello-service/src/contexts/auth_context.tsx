@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { decodeToken } from 'react-jwt'
 import { useNavigate } from 'react-router-dom'
-import { api } from '../services/client'
+import { API } from '../Services/client'
 
 interface IUser {
   id: string
@@ -66,7 +66,7 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
   }, [])
   const signIn = useCallback(async ({ email, password }: IAuthParams) => {
     try {
-      const response = await api.post('/auth/signin', { username: email, password })
+      const response = await API.post('/auth/signin', { username: email, password })
       const data = response.data
 
       if (data.signin) {
