@@ -11,7 +11,7 @@ export const Card: FunctionComponent<User> = ({Title,Users}) =>(
     <div>
     <div className="
               block
-              px-6
+         
               py-3         
               border border-white mb-2
               rounded-md

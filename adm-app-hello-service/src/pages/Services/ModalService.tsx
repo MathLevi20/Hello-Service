@@ -1,35 +1,59 @@
 ﻿import { useState } from 'react'
 import axios from 'axios'
+import { API } from '../../Services/client'
 
 export const ModalService = ({
   descricao,
   title,
-  id
+  id,
+  creator,
+  value
 }: {
   descricao: string
   title: string
   id: string
+  creator: string
+  value: number
 }) => {
   const [showModal, setShowModal] = useState(false)
-  const [Desc, setDesc] = useState('')
-  const [Title, setTitle] = useState('')
-  const acesstoken = localStorage.getItem('acetoken')
-  const client = axios.create({
-    baseURL: 'https://nightmarelight.onrender.com'
-  })
+  const [Desc, setDesc] = useState(descricao)
+  const [Value, setValue] = useState(value)
+  const [Title, setTitle] = useState(title)
 
-  console.log(id)
   async function Delete(id: string) {
-    client
-      .delete('/service/delete', {
-        data: {
-          ServiceId: id
-        },
-        headers: {
-          Authorization: acesstoken
-        }
-      })
+    API.delete('/service/delete', {
+      data: {
+        ServiceId: id
+      }
+    })
       .then(function (response: any) {
+        window.location.reload()
+        setShowModal(false)
+      })
+      .catch(function (error: any) {
+        console.error(error)
+      })
+  }
+
+  async function Put(
+    id: string,
+    name: string,
+    description: string,
+    value: number,
+    creator: string
+  ) {
+    const data = {
+      id: id,
+      name: name,
+      description: description,
+      value: value,
+      creator: creator
+    }
+
+    API.put('/service/update', data)
+      .then(function (response: any) {
+        console.log(data)
+
         window.location.reload()
         setShowModal(false)
       })
@@ -49,8 +73,8 @@ export const ModalService = ({
       </button>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+          <div className="fixed top-0 left-0 right-0 z-50  flex w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+            <div className="relative w-full h-full max-w-2xl md:h-auto m-auto">
               <div className="border-0 pt-6 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
@@ -59,6 +83,14 @@ export const ModalService = ({
                       type="text"
                       defaultValue={title}
                       onChange={(e) => setTitle(e.target.value)}
+                      className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full"
+                    />
+                  </div>
+                  <div className="mb-3 pt-0">
+                    <input
+                      type="text"
+                      defaultValue={Value}
+                      onChange={(e) => setValue(Number(e.target.value))}
                       className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full"
                     />
                   </div>
@@ -73,7 +105,10 @@ export const ModalService = ({
                                          text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0
                                           dark:text-white dark:placeholder-gray-400"
                       defaultValue={descricao}
-                      onChange={(e) => setDesc(e.target.value)}
+                      onChange={(e) => {
+                        setDesc(e.target.value)
+                        console.log(value)
+                      }}
                     />
                   </div>
                 </div>
@@ -85,6 +120,15 @@ export const ModalService = ({
                     onClick={() => setShowModal(false)}
                   >
                     Close
+                  </button>
+                  <button
+                    className="bg-slate-800 hover:bg-slate-900 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => {
+                      Put(id, Title, descricao, Value, creator)
+                    }}
+                  >
+                    Update
                   </button>
                   <button
                     className="bg-slate-800 hover:bg-slate-900 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

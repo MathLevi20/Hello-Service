@@ -1,43 +1,27 @@
 ﻿import { useEffect, useState } from 'react'
 
 import React from 'react'
+import { API } from '../../Services/client'
 
-export const Set = ({ descricao, title, id }: { descricao: string; title: string; id: number }) => {
-  const [Desc, setDesc] = useState('')
-  const [Title, setTitle] = useState('')
+export const Set = ({ descricao, title, id }: { descricao: string; title: string; id: string }) => {
+  const [Desc, setDesc] = useState(descricao)
+  const [Title, setTitle] = useState(title)
 
-  //https://nightmarelight.onrender.com/
-  async function Put(title: string, descricao: string, id: number) {
-    const addRecordEndpoint = 'http://localhost:3000/Contract/' + id
-    const options = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        Name: title,
-        Text: descricao
+  async function Put(title: string, descricao: string, id: string) {
+    const data = {
+      id: id,
+      name: Title,
+      content: Desc
+    }
+
+    API.put('/userterm/update', data)
+      .then(function (response: any) {
+        console.log(data)
+        window.location.reload()
       })
-    }
-
-    const response = await fetch(addRecordEndpoint, options)
-    const jsonResponse = await response.json().then(() => {
-      window.location.reload()
-    })
-
-    console.log(jsonResponse)
-  }
-  console.log(Desc)
-  async function Pot() {
-    if (Desc == '' && Title == '') {
-      Put(title, descricao, Number(id))
-    } else if (Desc == '') {
-      Put(Title, descricao, Number(id))
-    } else if (Title == '') {
-      Put(title, Desc, Number(id))
-    } else {
-      Put(Title, Desc, Number(id))
-    }
+      .catch(function (error: any) {
+        console.error(error)
+      })
   }
 
   return (
@@ -76,7 +60,7 @@ export const Set = ({ descricao, title, id }: { descricao: string; title: string
           className="bg-green-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           onClick={() => {
-            Pot()
+            Put(Title, Desc, id)
           }}
         >
           Save

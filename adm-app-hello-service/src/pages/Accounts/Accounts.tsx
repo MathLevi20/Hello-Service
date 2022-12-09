@@ -65,7 +65,7 @@ export const Accounts = () => {
       <div>
         <div
           className="  
-                py-3   grid grid-flow-col "
+                py-3   grid grid-flow-col  lg:grid-cols-6"
         >
           <div className="border-x px-6  py-2">Id</div>
           <div className="border-x px-4 py-2 ">Nome</div>
@@ -102,10 +102,10 @@ export const Accounts = () => {
               "
                 key={data.id}
               >
-                <div className="grid grid-cols-6 gap-1">
-                  <img className="rounded-full" src={`${data.avatar}`} width="40" />
-                  <div>{data.username}</div>
-                  <div>{data.cpf}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-1">
+                  <img className="mx-auto rounded-full" src={`${data.avatar}`} width="40" />
+                  <div className="mx-auto">{data.username}</div>
+                  <div className="mx-auto">{data.cpf}</div>
 
                   <button
                     className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded "
@@ -117,13 +117,13 @@ export const Accounts = () => {
                     className="bg-red-500 hover:bg-red-700 text-sm text-white font-bold py-2  px-2 rounded"
                     onClick={() => updateNote(data.id, data, 'is_banided_temp', true)}
                   >
-                    Banir Temporariamente
+                    Temporariamente
                   </button>
                   <button
                     className="bg-slate-800 text-sm hover:bg-slate-900 text-white font-bold py-2 px-2 rounded"
                     onClick={() => updateNote(data.id, data, 'is_banided_perm', true)}
                   >
-                    Banir Permanentemente
+                    Permanentemente
                   </button>
                 </div>
               </div>

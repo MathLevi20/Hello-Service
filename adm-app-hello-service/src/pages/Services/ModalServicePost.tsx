@@ -1,5 +1,6 @@
 ﻿import { useId, useState } from 'react'
 import axios from 'axios'
+import { API } from '../../Services/client'
 
 export const ModalServicePost = () => {
   const [showModal, setShowModal] = useState(false)
@@ -15,15 +16,11 @@ export const ModalServicePost = () => {
     const acesstoke1 = acesstoken.user.id
     const data = { name: name, userid: acesstoke1, value: value, description: description }
 
-    console.log(acesstoke1)
-    console.log(data)
-    console.log(data)
-    console.log(acesstoken)
     console.log(typeof acesstoken)
-    client
-      .post('/service/create', data)
+    API.post('/service/create', data)
       .then(function (response: any) {
         setShowModal(false)
+        window.location.reload()
       })
       .catch(function (error: any) {
         console.error(error)
@@ -40,8 +37,8 @@ export const ModalServicePost = () => {
       </button>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+          <div className="fixed top-0 left-0 right-0 z-50  flex w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+            <div className="relative w-full h-full max-w-2xl md:h-auto m-auto">
               {/*content*/}
               <div className="border-0 pt-6 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="relative p-6 flex-auto">
@@ -63,9 +60,9 @@ export const ModalServicePost = () => {
                   </div>
                   <div className="py-2 px-4 border-2  bg-white rounded-b-lg  dark:bg-gray-800">
                     <textarea
-                      style={{ minHeight: '14vh', minWidth: '90vh', height: 'unset' }}
+                      style={{ minHeight: '14vh', height: 'unset' }}
                       id="editor"
-                      className="block px-0 w-full text-sm outline-none
+                      className="block  px-0 w-full text-sm outline-none
                                          text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 
                                           dark:text-white dark:placeholder-gray-400"
                       placeholder={'Descrição do Cargo'}

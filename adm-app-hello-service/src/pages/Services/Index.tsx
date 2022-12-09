@@ -5,6 +5,7 @@ import ModalServicePost from '../Services/ModalServicePost'
 import axios from 'axios'
 import Nav from '../../components/Nav'
 import Loading from '../../components/Loading'
+import { API } from '../../Services/client'
 
 interface Services {
   price: number
@@ -19,22 +20,31 @@ export const Services = () => {
   const [popupVisible, setPopupVisible] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    const client = axios.create({
-      baseURL: ' https://nightmarelight.onrender.com'
-    })
+  const acesstoken = JSON.parse(localStorage.getItem('@user') || 'false')
+  const userid = acesstoken.user.id
 
-    client.get('/service', { headers: { 'Content-Type': 'application/json' } }).then((response) => {
-      setData(response.data)
-    })
-    setTimeout(function () {
-      console.log(data)
-      setIsLoading(false)
-    }, 1000)
-  }, [])
   function togglePopup() {
     setPopupVisible(!popupVisible)
   }
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line prettier/prettier
+      API.get('/service')
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .then(function (response: any) {
+          setIsLoading(true)
+          setData(response.data)
+          console.log(data)
+          console.log('feito')
+        })
+        .catch((error: any) => {
+          console.log(error)
+        })
+        .finally(() => setIsLoading(false))
+    } catch (error: any) {
+      console.log('Error')
+    } // complete loading success/fail
+  }, [])
 
   return (
     <div className="flex-1 p-6 font-bold h-screen overflow-y-auto">
@@ -66,7 +76,13 @@ export const Services = () => {
                 <div>R$ {data.price}</div>
               </div>
               <button onClick={togglePopup}>
-                <ModalService descricao={data.description} title={data.name} id={data.id} />
+                <ModalService
+                  descricao={data.description}
+                  creator={userid}
+                  value={data.price}
+                  title={data.name}
+                  id={data.id}
+                />
               </button>
             </div>
           ))}

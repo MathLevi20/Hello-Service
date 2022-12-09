@@ -33,17 +33,24 @@ useEffect(() => {
   } // complete loading success/fail
 }, []);
 
-return (
-  <div className=' bg-slate-600  w-full flex '> {isLoading ? <div className='m-auto'><Loading/></div>:
-    <div className='flex bg-slate-600 w-full pl-2'>
+return (   
+   <div className="flex-1 p-6 font-bold h-screen ">
+      <div className={`py-2 mb-4 text-2xl font-semibold flex-1 `}>
+        <h2>Dashboard</h2>
+    <div className='top-44   m-auto h-full w-full flex '> 
+    {isLoading ? <div className=' m-auto'><Loading/></div>:
+    <div className='top-44 flex m-auto  h-full w-full pl-2'>
     <div className='m-auto'>
-    <div className='grid grid-cols-1 xl:grid-flow-col sm:grid-cols-2 gap-4 mt-4  '>
+    <div className='grid  grid-cols-1 xl:grid-flow-col sm:grid-cols-2 gap-4 mt-4  '>
     {(Dados.map((data)=>(<Card key={data.users} Title={data.title} Users={data.users}/>)))}
     </div>
     </div>
     </div>
     }
     </div>
+      </div>
+    </div>
+
   )
 }
 
