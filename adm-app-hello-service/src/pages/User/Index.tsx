@@ -1,6 +1,7 @@
 ﻿import React, { useEffect, useState } from 'react'
 import { Await, useParams } from 'react-router-dom'
 import Nav from '../../components/Nav'
+import { API } from '../../Services/client'
 import Comments from './Comments'
 
 interface User {
@@ -37,7 +38,7 @@ function timeConverter(UNIX_timestamp: any) {
   return time
 }
 const User = () => {
-  const [data, setData1_] = useState<User[]>([])
+  const [data, setData] = useState<User[]>([])
   const [complaints, setDen] = useState<User[]>([])
   const [Ava, setAva] = useState<User[]>([])
   const [Commnets, setComments] = useState<User[]>([])
@@ -45,22 +46,21 @@ const User = () => {
   const Id = params.userId
 
   useEffect(() => {
-    const getUser = async () => {
-      const URL = 'http://localhost:3000/Usuarios/' + Id
-      const init: RequestInit = {
-        method: 'GET'
-      }
-
-      const response = await fetch(URL, init)
-      const data = await response.json()
-
-      setData1_([data])
-      await setComments(data.comments)
-      await setDen(data.denunciation)
-      await setAva(data.evaluation)
-    }
-
-    getUser()
+    try {
+      // eslint-disable-next-line prettier/prettier
+      API.get('/profile/'+ Id)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .then(function (response: any) {
+          setData(response.data)
+          console.log(data)
+          console.log('feito')
+        })
+        .catch((error: any) => {
+          console.log(error)
+        })
+    } catch (error: any) {
+      console.log('Error')
+    } // complete loading success/fail
   }, [])
 
   console.log(data)

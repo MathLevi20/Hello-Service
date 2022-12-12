@@ -33,7 +33,7 @@ export const Logout = () => {
           color: '#ddd'
         }}
       >
-        こんにちは {authData?.user.username}
+        {authData?.user.username}
       </h1>
       <button
         style={{
@@ -47,7 +47,7 @@ export const Logout = () => {
         }}
         onClick={signOut}
       >
-        近い
+        Sair
       </button>
     </div>
   )

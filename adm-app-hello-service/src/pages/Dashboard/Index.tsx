@@ -3,51 +3,63 @@
 import axios from 'axios';
 import React, { useState ,useEffect} from 'react'
 import Loading from '../../components/Loading';
-
-
 import { Card } from './Card'
 
-function Dashboard() {
+interface Dashboard {
+	online:number,
+	offline: number,
+	total: number
+}
 
-const Dados = [
-    { title: 'Número de usuários', users: 4000},
-    { title: 'Trabalhando Agora', users: 50},
-    { title: 'Usuários ativos', users: 1000},
-    { title: 'Usuarios Inativos', users: 100 }
- ]
+function Dashboard() {
+  type Dashboard = {
+    online:number,
+    offline: number,
+    total: number
+  }
+const [data, setData] = useState<Dashboard>({
+	online: 0,
+	offline:0 ,
+	total: 0
+})
+
 const [isLoading, setIsLoading] = useState(false)
 
 useEffect(() => {
   setIsLoading(true);
   try{
-  axios.get("https://nightmarelight.onrender.com/userterm/")
-    .then(data => {
-      console.log("teste")
+  axios.get("https://nightmarelight.onrender.com/profile/statistics")
+    .then(response => {
+      console.log(response)
+     setData(response.data)
+     console.log(data)
     })
     .catch(error => {
       console.log(error)
     })
     .finally(() => setIsLoading(false));}
     catch(error:any) {
-      console.log("aa");
+      console.log("Feito");
   } // complete loading success/fail
 }, []);
 
 return (   
-   <div className="flex-1 p-6 font-bold h-screen ">
-      <div className={`py-2 mb-4 text-2xl font-semibold flex-1 `}>
+   <div className="flex-1 p-6 font-bold    ">
+      <div className={`py-2 mb-4 text-2xl   h-full font-semibold `}>
         <h2>Dashboard</h2>
-    <div className='top-44   m-auto h-full w-full flex '> 
-    {isLoading ? <div className=' m-auto'><Loading/></div>:
-    <div className='top-44 flex m-auto  h-full w-full pl-2'>
+    {isLoading ? <div className='flex  h-4/5   pl-2 '>
+      <div className='m-auto'><Loading/></div></div>:
+    <div className='flex   sm:h-4/5   pl-2'>
     <div className='m-auto'>
-    <div className='grid  grid-cols-1 xl:grid-flow-col sm:grid-cols-2 gap-4 mt-4  '>
-    {(Dados.map((data)=>(<Card key={data.users} Title={data.title} Users={data.users}/>)))}
+    <div className='grid   grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4  '>
+    <Card key={1} Title={"Online"} Users={data.online}/>
+    <Card key={2} Title={"Offline"} Users={data.offline }/>
+    <Card key={3} Title={"Total"} Users={data.total}/>
     </div>
     </div>
     </div>
     }
-    </div>
+    
       </div>
     </div>
 

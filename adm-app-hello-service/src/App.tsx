@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, BrowserRouter } from 'react-router-dom'
 import Contract from './pages/Contract/Contract'
 import { AuthContextProvider, useAuth } from './contexts/auth_context'
 import Accounts from './pages/Accounts/Accounts'
@@ -12,6 +12,7 @@ import Settings from './pages/Settings/Index'
 import User from './pages/User/Index'
 import Nav from './components/Nav'
 import Dashboard from './pages/Dashboard/Index'
+import Claiming from './pages/Claiming/Index'
 
 interface IProps {
   children: ReactElement
@@ -40,7 +41,7 @@ const PublicRouter = ({ children }: IProps) => {
     )
   }
 
-  return !authData ? children : <Navigate to="/Accounts" replace />
+  return !authData ? children : <Navigate to="/Dashboard" replace />
 }
 
 const App = () => {
@@ -122,6 +123,14 @@ const App = () => {
               element={
                 <PrivateRouter>
                   <Settings />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Claiming"
+              element={
+                <PrivateRouter>
+                  <Claiming />
                 </PrivateRouter>
               }
             />

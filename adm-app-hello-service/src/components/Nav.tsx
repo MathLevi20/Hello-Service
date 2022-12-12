@@ -31,6 +31,12 @@ export const Nav = () => {
       path: '/BlackList'
     },
     {
+      title: 'Claiming',
+      src: 'https://ojkprgyzivdeqwjymnvn.supabase.co/storage/v1/object/sign/admin/NavBar/Key.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhZG1pbi9OYXZCYXIvS2V5LnBuZyIsInRyYW5zZm9ybWF0aW9ucyI6IiIsImlhdCI6MTY3MDcyMzgxNiwiZXhwIjoxOTg2MDgzODE2fQ.ZFkXYvqFA6LwAHBDSqrjvGo5mVPzlgzwLMObiOEprcU',
+
+      path: '/Claiming'
+    },
+    {
       title: 'Log ',
       src: 'https://ojkprgyzivdeqwjymnvn.supabase.co/storage/v1/object/sign/admin/NavBar/file.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhZG1pbi9OYXZCYXIvZmlsZS5wbmciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA1MDk4MzEsImV4cCI6MTk4NTg2OTgzMX0.1wWFUPKfH7_IF1NAKB7mS_gSwJc585C9QhGRc8eSF40',
       path: '/Log'

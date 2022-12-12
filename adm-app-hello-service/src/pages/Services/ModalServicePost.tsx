@@ -11,7 +11,6 @@ export const ModalServicePost = () => {
   const client = axios.create({ baseURL: 'https://nightmarelight.onrender.com' })
 
   async function addService(name: string, value: number, description: string) {
-    const userid = localStorage.getItem('id')
     const acesstoken = JSON.parse(localStorage.getItem('@user') || 'false')
     const acesstoke1 = acesstoken.user.id
     const data = { name: name, userid: acesstoke1, value: value, description: description }

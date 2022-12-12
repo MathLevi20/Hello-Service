@@ -1,8 +1,7 @@
 ﻿import { ReactNode, useEffect, useState } from 'react'
-import useFetch from 'react-fetch-hook'
 import Loading from '../../components/Loading'
-import Nav from '../../components/Nav'
 import { API } from '../../Services/client'
+import Pagination from '../Services/pagination'
 
 interface User_Ban {
   action: ReactNode
@@ -12,20 +11,18 @@ interface User_Ban {
   msg: string
   by: string
 }
-type json_download = {
-  data: any
-  Nome: string
-  msg: string
-}
 
 export const Log = () => {
   const [data, setData] = useState<User_Ban[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(10)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     try {
       // eslint-disable-next-line prettier/prettier
-      API.get('/Logs')
+      API.get('/Logs/experimental')
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then(function (response: any) {
           setIsLoading(true)
@@ -78,6 +75,9 @@ export const Log = () => {
   }
 
   console.log(data)
+  const lastPostIndex = currentPage * postsPerPage
+  const firstPostIndex = lastPostIndex - postsPerPage
+  const currentPosts = data.slice(firstPostIndex, lastPostIndex)
 
   return (
     <div className=" w-full">
@@ -88,7 +88,7 @@ export const Log = () => {
         </div>
         <button
           type="button"
-          className="flex w-max rounded bg-lime-600 p-2 text-white"
+          className="flex w-max rounded bg-yellow-500  p-2 text-gray-700 hover:bg-yellow-600 hover:text-white"
           onClick={exportToJson}
         >
           Export to JSON
@@ -105,29 +105,31 @@ export const Log = () => {
           {isLoading ? (
             <Loading />
           ) : (
-            data.map((data) => (
+            currentPosts.map((data) => (
               <div
                 className="
-                      block
-                      
-          
-                      border border-gray-400 mb-2
-                      w-full
-                      rounded-md
-                      text-black
-                      cursor-pointer
-                      hover:bg-gray-100
+                      m-2 border-4 border-gray-700 rounded-lg
                     "
                 key={data.id}
               >
-                <div className="grid grid-cols-1 md:grid-cols-3 ">
-                  <div className=" border-y sm:border-x w-full p-3 mx-auto">{data.id}</div>
-                  <div className=" border-y sm:border-x mx-auto w-full p-3 ">{data.action}</div>
-                  <div className=" border-y sm:border-x w-full p-3  mx-auto ">{data.time}</div>
+                <div className="grid grid-cols-1 divide-y md:grid-cols-3 ">
+                  <div className="  w-full p-3 mx-auto hover:bg-gray-200">{data.id}</div>
+                  <div className="border-y sm:border-x  hover:bg-gray-200 mx-auto w-full p-3 ">
+                    {data.action}
+                  </div>
+                  <div className="  w-full p-3  mx-auto hover:bg-gray-200 ">{data.time}</div>
                 </div>
               </div>
             ))
           )}
+        </div>
+        <div className="p-1 flex justify-center w-full">
+          <Pagination
+            totalPosts={data.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </div>
       </div>
     </div>

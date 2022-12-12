@@ -4,8 +4,10 @@ import { useState } from 'react'
 import Loading from '../../components/Loading'
 import Nav from '../../components/Nav'
 import { API } from '../../Services/client'
+import Pagination from '../Services/pagination'
 
 interface User {
+  banided: boolean
   id: string
   Nome: string
   cpf: string
@@ -18,12 +20,14 @@ interface User {
 export const Accounts = () => {
   const [data, setData] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const [se, setSe] = useState(' ')
+  const [search, setSearch] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(20)
 
   useEffect(() => {
     try {
       // eslint-disable-next-line prettier/prettier
-      API.get('http://localhost:3000/Usuarios')
+      API.get('/profile/all')
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then(function (response: any) {
           setData(response.data)
@@ -48,47 +52,53 @@ export const Accounts = () => {
       body: JSON.stringify({ ...data, [a]: value })
     })
   }
+  const lastPostIndex = currentPage * postsPerPage
+  const firstPostIndex = lastPostIndex - postsPerPage
+  const currentPosts = data.slice(firstPostIndex, lastPostIndex)
+
+  console.log(data)
 
   return (
-    <div className="flex-1 p-10  font-bold h-screen overflow-y-auto">
-      <div className={`py-6 text-2xl font-semibold flex-1 `}>
+    <div className="flex-1 p-6 font-bold h-screen overflow-y-auto">
+      <div className={`py-2 mb-4 text-2xl font-semibold flex-1 `}>
         <h2>Accounts</h2>
-      </div>
-      <div className="mb-3 pt-0">
-        <input
-          type="text"
-          placeholder={'Procurar'}
-          onChange={(e) => setSe(e.target.value)}
-          className="px-4 py-3 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left w-full"
-        />
+        <div className="mt-3 w-full flex justify-center pt-0">
+          <input
+            type="text"
+            placeholder={'Procurar'}
+            onChange={(e) => {
+              setSearch(e.target.value)
+            }}
+            className="px-4 py-3 flex justify-center w-3/4 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left "
+          />
+        </div>
       </div>
       <div>
         <div
           className="  
-                py-3   grid grid-flow-col  lg:grid-cols-6"
+                py-3   grid grid-flow-col text-center md:grid-cols-5"
         >
           <div className="border-x px-6  py-2">Id</div>
           <div className="border-x px-4 py-2 ">Nome</div>
-          <div className="border-x-l px-2 py-2 ">CPF</div>
         </div>
 
         {isLoading ? (
           <Loading />
         ) : (
-          data
+          currentPosts
             .filter((data) => {
               console.log(data.username)
-              if (se == ' ' && data.is_banided_perm == false && data.is_banided_temp == false) {
+              if (search == '' && data.banided == false) {
                 return data
               } else if (
-                data.username.toLowerCase().includes(se.toLowerCase()) &&
-                (data.is_banided_perm == false || data.is_banided_temp == false)
+                data.username.toLowerCase().includes(search.toLowerCase()) &&
+                data.banided == false
               ) {
                 return data
               }
             })
             .map((data) => (
-              /*if (se == data.username || data.username.toLowerCase().includes(data.username.toLowerCase()))*/ <div
+              /*if (search == data.username || data.username.toLowerCase().includes(data.username.toLowerCase()))*/ <div
                 className="
                 block
                 px-6
@@ -97,15 +107,21 @@ export const Accounts = () => {
                 w-full
                 rounded-md
                 text-black
-                cursor-pointer
                 hover:bg-gray-100
               "
                 key={data.id}
               >
-                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-1">
-                  <img className="mx-auto rounded-full" src={`${data.avatar}`} width="40" />
+                <div className="grid grid-cols-1 grid-flow-cols min-[850px]:grid-cols-5 gap-1">
+                  <img
+                    className="mx-auto rounded-full"
+                    src={
+                      data.avatar == 'linkaqui'
+                        ? 'https://img.icons8.com/ios/512/test-account.png'
+                        : data.avatar
+                    }
+                    width="40"
+                  />
                   <div className="mx-auto">{data.username}</div>
-                  <div className="mx-auto">{data.cpf}</div>
 
                   <button
                     className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded "
@@ -129,6 +145,14 @@ export const Accounts = () => {
               </div>
             ))
         )}
+      </div>
+      <div className=" flex justify-center text-sm w-full">
+        <Pagination
+          totalPosts={data.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   )
