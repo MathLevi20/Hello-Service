@@ -83,6 +83,7 @@ export const Blacklist = () => {
       >
         <div className="border-x px-6  py-2">Id</div>
         <div className="border-x px-4 py-2 ">Nome</div>
+        <div className="border-x-l px-2 py-2 ">Data</div>
       </div>
       <div>
         {isLoading ? (

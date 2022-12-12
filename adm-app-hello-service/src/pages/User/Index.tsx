@@ -1,8 +1,10 @@
 ﻿import React, { useEffect, useState } from 'react'
 import { Await, useParams } from 'react-router-dom'
+import Loading from '../../components/Loading'
 import Nav from '../../components/Nav'
 import { API } from '../../Services/client'
 import Comments from './Comments'
+import Empty from './empty'
 
 interface User {
   [x: string]: any
@@ -39,9 +41,10 @@ function timeConverter(UNIX_timestamp: any) {
 }
 const User = () => {
   const [data, setData] = useState<User[]>([])
-  const [complaints, setDen] = useState<User[]>([])
-  const [Ava, setAva] = useState<User[]>([])
-  const [Commnets, setComments] = useState<User[]>([])
+  const [complaints, setComplaints] = useState<User[]>([])
+  const [report, setReport] = useState<User[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
   const params = useParams()
   const Id = params.userId
 
@@ -62,90 +65,122 @@ const User = () => {
       console.log('Error')
     } // complete loading success/fail
   }, [])
-
-  console.log(data)
-  console.log(Commnets)
+  useEffect(() => {
+    API.get('/denounce/denounced/' + Id)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(function (response: any) {
+        setComplaints(response.data)
+        console.log('feito')
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
+  useEffect(() => {
+    API.get('/denounce/denouncer/' + Id)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(function (response: any) {
+        setReport(response.data)
+        console.log('feito')
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <div className="  h-screen overflow-y-auto w-full">
-      <div className="mx-auto pt-8 bg-yellow-300 text-gray-800">
-        {' '}
-        {data.map((data: any) => (
-          <div key={data.id}>
-            <div>
-              <div className="flex border-inherit rounded-lg w-fit mx-auto py-2  px-3">
-                <div className="object-center my-auto mx-3">
-                  <img src={data.avatar} className="w-24 rounded-full h-24" />
-                </div>
+      <div className="h-full">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="h-full">
+            <div className="mx-auto pt-8 bg-yellow-300 text-gray-800">
+              {data.map((data: any) => (
+                <div key={data.id}>
+                  <div>
+                    <div className="flex border-inherit rounded-lg w-fit mx-auto py-2  px-3">
+                      <div className="object-center my-auto mx-3">
+                        <img
+                          className="mx-auto rounded-full"
+                          src={
+                            data.avatar == 'linkaqui'
+                              ? 'https://img.icons8.com/ios/512/test-account.png'
+                              : data.avatar
+                          }
+                          width="50"
+                        />
+                      </div>
 
-                <div>
-                  <div className="flex flex-col my-auto mx-3 pt-4 ">
-                    <div>User : {data.username}</div>
-                    <div>
-                      Name : {data.first_name} {data.last_name}
+                      <div>
+                        <div className="flex flex-col my-auto mx-3 pt-4 ">
+                          <div>User : {data.username}</div>
+                          <div>
+                            Name : {data.first_name} {data.last_name}
+                          </div>
+                          <div>Description : {data.description}</div>
+                          <div>CEP : {data.zip_code}</div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col mx-2 gap-2">
+                        <button
+                          className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
+                          color=""
+                        >
+                          Banir Temporariamente
+                        </button>
+                        <button
+                          className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
+                          color=""
+                        >
+                          Banir Permanentemente
+                        </button>
+                        <button
+                          className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
+                          color=""
+                        >
+                          Apagar Perfil
+                        </button>
+                        <button
+                          className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
+                          color=""
+                        >
+                          Revogar Acesso ao aplicativo
+                        </button>
+                      </div>
                     </div>
-                    <div>Description : {data.description}</div>
-                    <div>CEP : {data.zip_code}</div>
                   </div>
                 </div>
-                <div className="flex flex-col mx-2 gap-2">
-                  <button
-                    className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
-                    color=""
-                  >
-                    Banir Temporariamente
-                  </button>
-                  <button
-                    className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
-                    color=""
-                  >
-                    Banir Permanentemente
-                  </button>
-                  <button
-                    className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
-                    color=""
-                  >
-                    Apagar Perfil
-                  </button>
-                  <button
-                    className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded"
-                    color=""
-                  >
-                    Revogar Acesso ao aplicativo
-                  </button>
+              ))}
+            </div>
+            <div className="bg-gray-900 h-full px-10 py-2   ">
+              <div className="bg-black-900 ">
+                <div className={`py-2 text-xl font-semibold flex-1 text-white `}>
+                  <h2>Complaints</h2>
                 </div>
+                {complaints.length > 0 ? (
+                  complaints.map((data: any) => (
+                    <Comments key={data.id} by={data.denounced} msg={data.reason} />
+                  ))
+                ) : (
+                  <Empty />
+                )}
+                <div className={`py-2 text-xl font-semibold flex-1 text-white `}>
+                  <h2>Reports</h2>
+                </div>
+
+                {report.length > 0 ? (
+                  report.map((data: any) => (
+                    <Comments key={data.id} by={data.denounced} msg={data.reason} />
+                  ))
+                ) : (
+                  <Empty />
+                )}
               </div>
             </div>
           </div>
-        ))}
-      </div>
-
-      <div className="bg-gray-900 px-10 py-2   ">
-        <div className="bg-black-900 ">
-          <div className={`p-2 text-xl font-semibold flex-1 text-white `}>
-            <h2>Evaluation</h2>
-          </div>
-          {Ava.map((data: any) => (
-            <Comments by={data.by} msg={data.msg} time={timeConverter(data.time)} />
-          ))}
-        </div>
-        <div className={`p-2 text-xl font-semibold  text-white  flex-1 `}>
-          <h2>Comments</h2>
-        </div>
-        <div>
-          {Commnets.map((data: any) => (
-            <Comments by={data.by} msg={data.msg} time={timeConverter(data.time)} />
-          ))}
-        </div>
-        <div className={`p-2 text-xl font-semibold  text-white  flex-1 `}>
-          <h2>Denuncias</h2>
-        </div>
-        <div className="mx-auto text-white ">
-          {' '}
-          {complaints.map((data: any) => (
-            <Comments by={data.by} msg={data.msg} time={timeConverter(data.time)} />
-          ))}
-        </div>
+        )}
       </div>
     </div>
   )
