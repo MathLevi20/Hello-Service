@@ -57,7 +57,31 @@ export const Blacklist = () => {
   }
   const lastPostIndex = currentPage * postsPerPage
   const firstPostIndex = lastPostIndex - postsPerPage
-  const currentPosts = data.slice(firstPostIndex, lastPostIndex)
+
+  function UnBan(data: any) {
+    API.patch('/sanction/revogue', data)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(function (response: any) {
+        setData(response.data)
+        console.log(data)
+        console.log('feito')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      .finally(() => setIsLoading(false))
+  }
+
+  function changedata(data: any) {
+    if (search == '') {
+      const currentPosts = data.slice(firstPostIndex, lastPostIndex)
+
+      return currentPosts
+    }
+
+    return data
+  }
+  console.log(data)
 
   console.log(data)
   console.log(typeof data)
@@ -71,7 +95,7 @@ export const Blacklist = () => {
             type="text"
             placeholder={'Procurar'}
             onChange={(e) => {
-              setSearch(e.target.value)
+              setSearch(e.target.value), changedata(data)
             }}
             className="px-4 py-3 flex justify-center w-3/4 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left "
           />
@@ -89,8 +113,8 @@ export const Blacklist = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          data
-            .filter((data) => {
+          changedata(data)
+            .filter((data: any) => {
               console.log(data.username)
               if (search == '' && data.banided == true) {
                 return data
@@ -101,7 +125,7 @@ export const Blacklist = () => {
                 return data
               }
             })
-            .map((data, index) => (
+            .map((data: any) => (
               <div
                 className="
                  
@@ -128,15 +152,16 @@ export const Blacklist = () => {
                     width="40"
                   />
                   <div className="mx-auto">{data.username}</div>
-                  <button className="bg-slate-800 text-[12px] hover:bg-slate-900 text-white font-bold py-2 px-2 rounded">
+                  <button
+                    className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-1   px-2 rounded "
+                    onClick={(event) => (window.location.href = '/User/' + data.id)}
+                  >
                     Ver Perfil
                   </button>
-                  <button className="bg-red-500 hover:bg-red-700 text-[12px] text-white font-bold py-2 px-2 rounded">
-                    Excluir
-                  </button>
+
                   <button
                     className="bg-yellow-400 text-[12px] hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded"
-                    onClick={() => updateNote(data.id, data, false, false)}
+                    onClick={() => UnBan({ userban: data.id })}
                   >
                     Desbanir
                   </button>

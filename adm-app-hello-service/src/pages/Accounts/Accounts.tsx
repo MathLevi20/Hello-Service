@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import Loading from '../../components/Loading'
 import Nav from '../../components/Nav'
-import { API } from '../../Services/client'
+import { API, TimeConverter, UserId } from '../../Services/client'
 import Pagination from '../Services/pagination'
 
 interface User {
@@ -16,13 +16,18 @@ interface User {
   is_banided_perm: boolean
   is_banided_temp: boolean
 }
+TimeConverter(7)
 
 export const Accounts = () => {
   const [data, setData] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(20)
+  const [postsPerPage, setPostsPerPage] = useState(5)
+
+  function handlerdata() {
+    return TimeConverter(7)
+  }
 
   useEffect(() => {
     try {
@@ -43,19 +48,33 @@ export const Accounts = () => {
     } // complete loading success/fail
   }, [])
 
-  const updateNote = async (id: any, data: any, a: any, value: any) => {
-    await fetch(`http://localhost:3000/Usuarios/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ...data, [a]: value })
-    })
+  function Ban(data: any, typeban: string) {
+    API.post('/sanction/' + typeban, data)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then(function (response: any) {
+        setData(response.data)
+        console.log(data)
+        console.log('feito')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      .finally(() => setIsLoading(false))
   }
+
   const lastPostIndex = currentPage * postsPerPage
   const firstPostIndex = lastPostIndex - postsPerPage
   const currentPosts = data.slice(firstPostIndex, lastPostIndex)
 
+  function changedata(data: any) {
+    if (search == '') {
+      const currentPosts = data.slice(firstPostIndex, lastPostIndex)
+
+      return currentPosts
+    }
+
+    return data
+  }
   console.log(data)
 
   return (
@@ -67,7 +86,7 @@ export const Accounts = () => {
             type="text"
             placeholder={'Procurar'}
             onChange={(e) => {
-              setSearch(e.target.value)
+              setSearch(e.target.value), changedata(data)
             }}
             className="px-4 py-3 flex justify-center w-3/4 placeholder-slate-900 text-black relative  rounded text-lg border-2 outline-none text-left "
           />
@@ -85,8 +104,8 @@ export const Accounts = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          currentPosts
-            .filter((data) => {
+          changedata(data)
+            .filter((data: any) => {
               console.log(data.username)
               if (search == '' && data.banided == false) {
                 return data
@@ -97,7 +116,7 @@ export const Accounts = () => {
                 return data
               }
             })
-            .map((data) => (
+            .map((data: any) => (
               /*if (search == data.username || data.username.toLowerCase().includes(data.username.toLowerCase()))*/ <div
                 className="
                 block
@@ -131,15 +150,20 @@ export const Accounts = () => {
                   </button>
                   <button
                     className="bg-red-500 hover:bg-red-700 text-sm text-white font-bold py-2  px-2 rounded"
-                    onClick={() => updateNote(data.id, data, 'is_banided_temp', true)}
+                    onClick={() => Ban({ userid: UserId(), userban: data.id }, 'permanent')}
                   >
-                    Temporariamente
+                    Permanente
                   </button>
                   <button
                     className="bg-slate-800 text-sm hover:bg-slate-900 text-white font-bold py-2 px-2 rounded"
-                    onClick={() => updateNote(data.id, data, 'is_banided_perm', true)}
+                    onClick={() =>
+                      Ban(
+                        { userid: UserId(), userban: data.id, bantime: handlerdata() },
+                        'temporary'
+                      )
+                    }
                   >
-                    Permanentemente
+                    Temporario
                   </button>
                 </div>
               </div>
