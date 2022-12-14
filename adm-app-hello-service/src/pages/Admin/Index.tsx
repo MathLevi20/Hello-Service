@@ -18,7 +18,7 @@ interface User {
 }
 TimeConverter(7)
 
-export const Accounts = () => {
+export const Admin = () => {
   const [data, setData] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -79,7 +79,7 @@ export const Accounts = () => {
   return (
     <div className="flex-1 p-6 font-bold h-screen overflow-y-auto">
       <div className={`py-2 mb-4 text-2xl font-semibold flex-1 `}>
-        <h2>Accounts</h2>
+        <h2>Administrator</h2>
         <div className="mt-3 w-full flex justify-center pt-0">
           <input
             type="text"
@@ -181,4 +181,4 @@ export const Accounts = () => {
   )
 }
 
-export default Accounts
+export default Admin

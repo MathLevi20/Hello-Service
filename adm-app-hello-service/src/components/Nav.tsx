@@ -20,6 +20,11 @@ export const Nav = () => {
       path: '/Contract'
     },
     {
+      title: 'Administrator',
+      src: 'https://ojkprgyzivdeqwjymnvn.supabase.co/storage/v1/object/sign/admin/NavBar/Admin.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhZG1pbi9OYXZCYXIvQWRtaW4ucG5nIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwOTgzOTUwLCJleHAiOjE5ODYzNDM5NTB9.CMmIW4x-2LMtQBz6ZzLs5vTRHUil2IpyA9Hx58P-XL4',
+      path: '/Admin'
+    },
+    {
       title: 'Accounts',
       src: 'https://ojkprgyzivdeqwjymnvn.supabase.co/storage/v1/object/sign/admin/NavBar/Contact.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhZG1pbi9OYXZCYXIvQ29udGFjdC5wbmciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA1MDk3NjcsImV4cCI6MTk4NTg2OTc2N30.acyWm-ZQKLe68oVdZFff_7UPbEE0BqEg38fjy1A-XR0',
       gap: true,

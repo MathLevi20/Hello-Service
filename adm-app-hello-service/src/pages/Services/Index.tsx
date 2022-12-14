@@ -6,7 +6,7 @@ import axios from 'axios'
 import Nav from '../../components/Nav'
 import Loading from '../../components/Loading'
 import { API } from '../../Services/client'
-import Pagination from './pagination'
+import Pagination from '../../components/pagination'
 
 interface Services {
   price: number

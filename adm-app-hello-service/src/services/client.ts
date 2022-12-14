@@ -20,8 +20,8 @@ export function TimeConverter(days: number) {
   const timestamp = Date.now()
   const time = new Date(timestamp)
   const year = time.getFullYear()
-  const month = time.getMonth()+1
-  const date = time.getDate()+1
+  const month = time.getMonth() + 1
+  const date = time.getDate() + 1
   const timeformat = `${year}-${month}-${date}`
 
   console.log(year)

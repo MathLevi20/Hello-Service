@@ -13,6 +13,7 @@ import User from './pages/User/Index'
 import Nav from './components/Nav'
 import Dashboard from './pages/Dashboard/Index'
 import Claiming from './pages/Claiming/Index'
+import Admin from './pages/Admin/Index'
 
 interface IProps {
   children: ReactElement
@@ -91,6 +92,14 @@ const App = () => {
               element={
                 <PrivateRouter>
                   <Blacklist />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/Admin"
+              element={
+                <PrivateRouter>
+                  <Admin />
                 </PrivateRouter>
               }
             />

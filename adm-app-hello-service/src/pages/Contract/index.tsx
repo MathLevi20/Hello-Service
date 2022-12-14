@@ -6,7 +6,7 @@ import Contract from '../../pages/Contract/Contract'
 import { API, UserId } from '../../Services/client'
 import Loading from '../../components/Loading'
 import { title } from 'process'
-import Pagination from '../Services/pagination'
+import Pagination from '../../components/pagination'
 
 interface Contract {
   id: string

@@ -3,7 +3,7 @@ import useFetch from 'react-fetch-hook'
 import Loading from '../../components/Loading'
 import Nav from '../../components/Nav'
 import { API } from '../../Services/client'
-import Pagination from '../Services/pagination'
+import Pagination from '../../components/pagination'
 
 interface User_Ban {
   avatar: any

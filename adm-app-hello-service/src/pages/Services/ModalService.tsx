@@ -99,7 +99,7 @@ export const ModalService = ({
                       Descrição
                     </p>
                     <textarea
-                      style={{ minHeight: '14vh', minWidth: '90vh', height: 'unset' }}
+                      style={{ minHeight: '14vh', height: 'unset' }}
                       id="editor"
                       className="block px-0 w-full text-sm outline-none
                                          text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0

@@ -1,7 +1,7 @@
 ﻿import { ReactNode, useEffect, useState } from 'react'
 import Loading from '../../components/Loading'
 import { API } from '../../Services/client'
-import Pagination from '../Services/pagination'
+import Pagination from '../../components/pagination'
 
 interface User_Ban {
   action: ReactNode
