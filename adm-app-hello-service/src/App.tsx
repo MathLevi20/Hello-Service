@@ -18,6 +18,7 @@ import Admin from './pages/Admin/Index'
 interface IProps {
   children: ReactElement
 }
+
 const PrivateRouter = ({ children }: IProps) => {
   const { authData } = useAuth()
 
